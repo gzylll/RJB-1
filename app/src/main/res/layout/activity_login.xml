@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context="valderfields.rjb_1.MainActivity">
+    tools:context="valderfields.rjb_1.LoginActivity">
 
     <LinearLayout
         android:id="@+id/user_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:orientation="vertical">
 
         <!--用户名-->
         <android.support.design.widget.TextInputLayout
@@ -23,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/username"
+                android:inputType="text"
                 android:hint="@string/editUserName"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -81,4 +81,5 @@
         android:layout_marginTop="5dp"/>
 
     </LinearLayout>
+
 </RelativeLayout>
