@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">RJB-1</string>
-
+    <string name="app_name">图片分发系统</string>
     <!--登录注册界面-->
-    <string name="login">登陆</string>
+    <string name="login">登录</string>
     <string name="register">注册</string>
     <string name="editUserName">请输入用户名</string>
     <string name="editPassword">请输入密码</string>

@@ -19,6 +19,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 登录操作
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button login;
@@ -52,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //登录
             final RequestBody requestBody = new FormBody.Builder()
                     .add("username",un)
-                    .add("password",pw)
+                    .add("password",EncodeUtil.shaEncode(pw))
                     .build();
 
             new Thread(){
@@ -67,7 +70,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
-                            Log.i("Login",response.body().string());
+                            //Log.i("Login",response.body().string());
+                            jxJSON.Ceshi(response.body().string());
                         }
                     });
                 }

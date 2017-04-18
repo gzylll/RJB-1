@@ -15,9 +15,18 @@ public class okHttpUilts {
     private static OkHttpClient PersonalOkHttpCilent = new OkHttpClient.Builder().build();
 
     /**
+     * localHost
+     */
+    final private static String localHost = "http://123.206.214.198:8080/ImageSortServer";
+    /**
      * 登录的url
      */
-    final private static String loginUrl = "http://123.206.214.198:8080/ImageSortServer/LoginServlet";
+    final private static String loginUrl = localHost+"/LoginServlet";
+
+    /**
+     * 注册的url
+     */
+    final private static String registerUrl = localHost+"/RegisterServlet";
 
     /**
      * 获得带有cookie管理的对象
@@ -30,6 +39,11 @@ public class okHttpUilts {
     public static String getLoginUrl(){
         return loginUrl;
     }
+
+    public static String getRegisterUrl() {
+        return registerUrl;
+    }
+
     /**
      * 获得请求函数
      * @param url  请求url
