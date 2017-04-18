@@ -1,19 +1,26 @@
 package valderfields.rjb_1;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.CookieManager;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
+ * 网络访问工具类
  * Created by 11650 on 2017/4/13.
  */
 
-public class okHttpUilts {
+public class NetUtil {
 
     private static OkHttpClient PersonalOkHttpCilent = new OkHttpClient.Builder().build();
-
     /**
      * localHost
      */
@@ -53,5 +60,23 @@ public class okHttpUilts {
     public static Request getRequest(String url, RequestBody requestBody)
     {
         return new Request.Builder().url(url).post(requestBody).build();
+    }
+
+    /**
+     * 从URL获取图片
+     * @param path URL
+     * @return 图片
+     * @throws IOException IO异常
+     */
+    public static Bitmap getBitmap(String path) throws IOException {
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setConnectTimeout(5000);
+        conn.setRequestMethod("GET");
+        if(conn.getResponseCode() == 200){
+            InputStream inputStream = conn.getInputStream();
+            return BitmapFactory.decodeStream(inputStream);
+        }
+        return null;
     }
 }

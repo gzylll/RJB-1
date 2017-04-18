@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password = (EditText)findViewById(R.id.password);
         remPWD = (CheckBox)findViewById(R.id.rempwn);
         autoLogin = (CheckBox)findViewById(R.id.autologin);
+        getSupportActionBar().setTitle("登录");
     }
 
     private void Login(){
@@ -60,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             new Thread(){
                 public void run(){
-                    Request request = okHttpUilts.getRequest(okHttpUilts.getLoginUrl(),requestBody);
-                    okHttpUilts.getOkHttpClient().newCall(request).enqueue(new Callback() {
+                    Request request = NetUtil.getRequest(NetUtil.getLoginUrl(),requestBody);
+                    NetUtil.getOkHttpClient().newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             Log.i("Login","Failure");

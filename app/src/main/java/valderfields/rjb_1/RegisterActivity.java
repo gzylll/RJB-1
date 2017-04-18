@@ -134,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         confirmMessage3 = (TextView) findViewById(R.id.confirmMessage3);
         register = (Button) findViewById(R.id.ZC);
         register.setOnClickListener(this);
+        getSupportActionBar().setTitle("注册");
     }
 
     @Override
@@ -148,8 +149,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //注册
         new Thread() {
             public void run() {
-                Request request = okHttpUilts.getRequest(okHttpUilts.getRegisterUrl(), requestBody);
-                okHttpUilts.getOkHttpClient().newCall(request).enqueue(new Callback() {
+                Request request = NetUtil.getRequest(NetUtil.getRegisterUrl(), requestBody);
+                NetUtil.getOkHttpClient().newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.i("Register", "Failure");

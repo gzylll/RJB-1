@@ -7,7 +7,6 @@ import android.view.View;
  * View切换方式
  * Created by 11650 on 2017/4/18.
  */
-
 public class PageTransformer implements ViewPager.PageTransformer {
 
     private static final float MIN_SCALE = 0.85f;
