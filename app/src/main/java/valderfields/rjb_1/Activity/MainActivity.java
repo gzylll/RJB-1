@@ -1,7 +1,9 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import valderfields.rjb_1.R;
 
 public class MainActivity extends AppCompatActivity {
 

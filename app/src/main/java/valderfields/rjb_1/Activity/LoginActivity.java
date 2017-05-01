@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +18,10 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import valderfields.rjb_1.Bean.EncodeUtil;
+import valderfields.rjb_1.Bean.NetUtil;
+import valderfields.rjb_1.R;
+import valderfields.rjb_1.Bean.jxJSON;
 
 /**
  * 登录操作
@@ -56,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //登录
             final RequestBody requestBody = new FormBody.Builder()
                     .add("username",un)
-                    .add("password",EncodeUtil.shaEncode(pw))
+                    .add("password", EncodeUtil.shaEncode(pw))
                     .build();
 
             new Thread(){

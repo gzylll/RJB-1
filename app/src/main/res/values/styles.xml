@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="popwindow_bottom_anim">
+        <item name="android:windowEnterAnimation">@anim/popshow_bottom_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_bottom_anim</item>
+    </style>
+
+    <style name="popwindow_top_anim">
+        <item name="android:windowEnterAnimation">@anim/popshow_top_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_top_anim</item>
+    </style>
 </resources>

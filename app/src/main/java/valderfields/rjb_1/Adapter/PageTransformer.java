@@ -1,10 +1,10 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Adapter;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 /**
- * View切换方式
+ * ViewPager切换方式
  * Created by 11650 on 2017/4/18.
  */
 public class PageTransformer implements ViewPager.PageTransformer {

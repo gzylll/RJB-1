@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Bean;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,7 +34,10 @@ public class NetUtil {
      * 注册的url
      */
     final private static String registerUrl = localHost+"/RegisterServlet";
-
+    /**
+     * 请求图片的url
+     */
+    final private static String requestImageUrl = localHost+"/ImageDistributeServlet";
     /**
      * 获得带有cookie管理的对象
      * @return 对象
@@ -49,6 +52,10 @@ public class NetUtil {
 
     public static String getRegisterUrl() {
         return registerUrl;
+    }
+
+    public static String getRequestImageUrl() {
+        return requestImageUrl;
     }
 
     /**

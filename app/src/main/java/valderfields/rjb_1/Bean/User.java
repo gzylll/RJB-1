@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Bean;
 
 import java.io.Serializable;
 

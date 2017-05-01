@@ -1,12 +1,12 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
+
+import valderfields.rjb_1.R;
 
 public class LoadActivity extends AppCompatActivity {
 

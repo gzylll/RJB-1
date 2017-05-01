@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    tools:context="valderfields.rjb_1.RegisterActivity">
+    tools:context="valderfields.rjb_1.Activity.RegisterActivity">
     <LinearLayout
         android:id="@+id/user_register"
         android:layout_width="match_parent"

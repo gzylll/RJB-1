@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +21,9 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import valderfields.rjb_1.Bean.EncodeUtil;
+import valderfields.rjb_1.Bean.NetUtil;
+import valderfields.rjb_1.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
