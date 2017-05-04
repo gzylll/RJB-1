@@ -3,10 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--返回-->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/person"
+        android:id="@+id/toPerson"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="返回"/>
-
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/image_num"/>
 </LinearLayout>

@@ -30,40 +30,6 @@ public class ViewPagerAdapter extends PagerAdapter {
     private LinkedList<View> mViewCache = null;
     private Context context;
     private LayoutInflater mLayoutInflater = null;
-    //点击之后的弹出窗口
-    private PopupWindow top;
-    private PopupWindow bottom;
-    private boolean isShow = false;
-    //布局点击事件
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Log.i("click","Click");
-            if(isShow)
-            {
-                top.dismiss();
-                bottom.dismiss();
-                isShow = false;
-            }
-            else
-            {
-                //设置menu位置在底部
-                bottom.showAtLocation(v, Gravity.BOTTOM,0,0);
-                bottom.setFocusable(false);
-                bottom.setOutsideTouchable(true);
-                bottom.setAnimationStyle(R.style.popwindow_bottom_anim);
-                bottom.update();
-                //设置title位置在顶部
-                top.showAtLocation(v, Gravity.TOP,0,0);
-                top.setFocusable(false);
-                top.setOutsideTouchable(true);
-                top.setAnimationStyle(R.style.popwindow_top_anim);
-                top.update();
-                isShow = true;
-            }
-        }
-    };
-
 
     public ViewPagerAdapter(List<Image> list,Context context){
         super();
@@ -71,12 +37,6 @@ public class ViewPagerAdapter extends PagerAdapter {
         this.context=context;
         this.mLayoutInflater=LayoutInflater.from(context);
         this.mViewCache=new LinkedList<>();
-        View popTopView = mLayoutInflater.inflate(R.layout.image_popwindow_top, null, false);
-        View popBottomView = mLayoutInflater.inflate(R.layout.image_popwindow_bottom, null, false);
-        top = new PopupWindow(popTopView, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-        bottom = new PopupWindow(popBottomView, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
@@ -98,7 +58,8 @@ public class ViewPagerAdapter extends PagerAdapter {
             //实例化一个写入缓存
             convertView = this.mLayoutInflater.inflate(R.layout.items_viewpager , null ,false);
             ImageView imageView= (ImageView)convertView.findViewById(R.id.view_pager_item_ImageView);
-            imageView.setOnClickListener(onClickListener);
+            //将监听给ImageCLickListener
+            imageView.setOnClickListener(ImageClickListener.getInstance(context));
             viewHolder = new ViewHolder();
             viewHolder.mImage = imageView;
             convertView.setTag(viewHolder);
