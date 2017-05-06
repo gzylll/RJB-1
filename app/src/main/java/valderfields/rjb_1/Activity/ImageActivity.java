@@ -11,59 +11,55 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import valderfields.rjb_1.Adapter.ImageClickListener;
+import valderfields.rjb_1.Adapter.ImagePresenter;
 import valderfields.rjb_1.Bean.Image;
 import valderfields.rjb_1.Adapter.PageTransformer;
 import valderfields.rjb_1.R;
 import valderfields.rjb_1.Adapter.ViewPagerAdapter;
 import valderfields.rjb_1.SlidingMenu;
 
-public class ImageActivity extends AppCompatActivity {
+public class ImageActivity extends AppCompatActivity implements Observer{
 
     private List<Image> images = new ArrayList<>();
+    private ImagePresenter presenter;
+    private ImageClickListener listener;
+    private ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
         getSupportActionBar().hide();
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         final SlidingMenu menu = (SlidingMenu)findViewById(R.id.menu);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        initData();
-        ViewPagerAdapter adapter = new ViewPagerAdapter(images,this);
+        presenter = new ImagePresenter(this,viewPager);
+        presenter.start();
+        presenter.addObserver(this);
+        //initData();
+        adapter = new ViewPagerAdapter(this);
         viewPager.setPageTransformer(true,new PageTransformer());
         viewPager.setAdapter(adapter);
-        ImageClickListener.SetSlidingMenu(menu);
+        listener = ImageClickListener.getInstance(this);
+        listener.SetSlidingMenu(menu);
+
     }
 
-
-    private void initData(){
-        for(int i=0;i<4;i++){
-            Image image = new Image();
-            image.bitmap = getRes("p"+String.valueOf(i+1));
-            images.add(image);
+    @Override
+    @SuppressWarnings("unchecked")
+    public void update(Observable o, Object arg) {
+        if(o instanceof ImagePresenter){
+            final List<Image> images = (List<Image>)arg;
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.Update(images);
+                    adapter.notifyDataSetChanged();
+                }
+            });
         }
-    }
-
-    public Bitmap getRes(String name) {
-        ApplicationInfo appInfo = getApplicationInfo();
-        int resID = getResources().getIdentifier(name, "mipmap", appInfo.packageName);
-        return BitmapFactory.decodeResource(getResources(), resID);
     }
 }

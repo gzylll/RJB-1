@@ -2,6 +2,7 @@ package valderfields.rjb_1.Bean;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,21 +70,4 @@ public class NetUtil {
         return new Request.Builder().url(url).post(requestBody).build();
     }
 
-    /**
-     * 从URL获取图片
-     * @param path URL
-     * @return 图片
-     * @throws IOException IO异常
-     */
-    public static Bitmap getBitmap(String path) throws IOException {
-        URL url = new URL(path);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setConnectTimeout(5000);
-        conn.setRequestMethod("GET");
-        if(conn.getResponseCode() == 200){
-            InputStream inputStream = conn.getInputStream();
-            return BitmapFactory.decodeStream(inputStream);
-        }
-        return null;
-    }
 }

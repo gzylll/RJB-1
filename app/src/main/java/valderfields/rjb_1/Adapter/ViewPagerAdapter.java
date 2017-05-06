@@ -1,18 +1,22 @@
 package valderfields.rjb_1.Adapter;
 
 import android.content.Context;
+import android.os.Looper;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 
+import com.loopj.android.image.SmartImageView;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import valderfields.rjb_1.Bean.Image;
 import valderfields.rjb_1.R;
@@ -22,19 +26,19 @@ import valderfields.rjb_1.R;
  * Created by 11650 on 2017/4/18.
  */
 
-public class ViewPagerAdapter extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter{
 
     //显示的数据
-    private List<Image> dataList = null;
+    private List<Image> dataList = new ArrayList<>();
     //显示的View,复用
     private LinkedList<View> mViewCache = null;
     private Context context;
     private LayoutInflater mLayoutInflater = null;
 
-    public ViewPagerAdapter(List<Image> list,Context context){
+    public ViewPagerAdapter(Context context){
         super();
-        this.dataList=list;
         this.context=context;
+        dataList.add(new Image());
         this.mLayoutInflater=LayoutInflater.from(context);
         this.mViewCache=new LinkedList<>();
     }
@@ -60,16 +64,28 @@ public class ViewPagerAdapter extends PagerAdapter {
             ImageView imageView= (ImageView)convertView.findViewById(R.id.view_pager_item_ImageView);
             //将监听给ImageCLickListener
             imageView.setOnClickListener(ImageClickListener.getInstance(context));
+            ProgressBar loading = (ProgressBar)convertView.findViewById(R.id.view_pager_item_Loading);
             viewHolder = new ViewHolder();
             viewHolder.mImage = imageView;
+            viewHolder.loading = loading;
             convertView.setTag(viewHolder);
         }else {
             convertView = mViewCache.removeFirst();
             viewHolder = (ViewHolder)convertView.getTag();
         }
         //填数据
-        viewHolder.mImage.setImageBitmap(dataList.get(position).bitmap);
-        container.addView(convertView ,ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT );
+        Log.i("ceshi",String.valueOf(dataList.size()));
+        if(dataList.get(position).bitmap!=null){
+            Log.i("shuju",String.valueOf(position));
+            viewHolder.loading.setVisibility(View.GONE);
+            viewHolder.mImage.setVisibility(View.VISIBLE);
+            viewHolder.mImage.setImageBitmap(dataList.get(position).bitmap);
+        }
+        else{
+            viewHolder.loading.setVisibility(View.VISIBLE);
+            viewHolder.mImage.setVisibility(View.GONE);
+        }
+        container.addView(convertView);
         return convertView;
     }
 
@@ -101,7 +117,12 @@ public class ViewPagerAdapter extends PagerAdapter {
         return view==object;
     }
 
-    public final class ViewHolder{
+    public void Update(List<Image> images) {
+        dataList = images;
+    }
+
+    private final class ViewHolder{
         ImageView mImage;
+        ProgressBar loading;
     }
 }

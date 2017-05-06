@@ -1,7 +1,6 @@
 package valderfields.rjb_1.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,12 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import valderfields.rjb_1.Bean.Image;
 import valderfields.rjb_1.R;
 import valderfields.rjb_1.SlidingMenu;
 
 /**
+ * Image界面点击处理类
  * Created by 11650 on 2017/5/4.
  */
 
@@ -22,27 +23,29 @@ public class ImageClickListener implements View.OnClickListener {
     private static ImageClickListener listener;
     //点击之后的弹出框和状态
     private static PopupWindow top;
+    private static View popTopView;
     private static PopupWindow bottom;
+    private static View popBottomView;
     private boolean isShow = false;
     private static LayoutInflater mLayoutInflater;
     //slidingmenu
-    private static SlidingMenu slinding;
+    private SlidingMenu slinding;
     //top组件
     private static ImageButton toPerson;
     //bottom组件
+
 
     //弹出框等的初始化
     private static void init(Context context){
         listener = new ImageClickListener();
         mLayoutInflater = LayoutInflater.from(context);
-        View popTopView = mLayoutInflater.inflate(R.layout.image_popwindow_top, null, false);
-        View popBottomView = mLayoutInflater.inflate(R.layout.image_popwindow_bottom, null, false);
+        popTopView = mLayoutInflater.inflate(R.layout.image_popwindow_top, null, false);
+        popBottomView = mLayoutInflater.inflate(R.layout.image_popwindow_bottom, null, false);
         top = new PopupWindow(popTopView, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
         toPerson = (ImageButton) popTopView.findViewById(R.id.toPerson);
         toPerson.setOnClickListener(listener);
-        TextView tv = (TextView)popTopView.findViewById(R.id.image_num);
-        tv.setText("hahaha");
+        //此处写入组件获取
         bottom = new PopupWindow(popBottomView, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
     }
@@ -56,8 +59,16 @@ public class ImageClickListener implements View.OnClickListener {
     }
 
     //设置SlidingMenu
-    public static void SetSlidingMenu(SlidingMenu menu){
+    public void SetSlidingMenu(SlidingMenu menu){
         slinding = menu;
+    }
+
+    /**
+     * 更新弹出框的数据
+     * @param image 当前选中的数据
+     */
+    public static void UpdateView(Image image){
+
     }
 
     @Override

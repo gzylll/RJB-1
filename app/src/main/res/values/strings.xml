@@ -10,7 +10,8 @@
     <string name="rememberPwn">记住密码</string>
 
     <!--图片弹出框-->
-    <string name="tag">标签</string>
+    <string name="editTag">输入标签</string>
     <string name="skip">跳过</string>
+    <string name="submit">提交</string>
     <string name="area">区域</string>
 </resources>

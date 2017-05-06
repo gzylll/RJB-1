@@ -5,5 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="valderfields.rjb_1.Activity.LoadActivity"
-    android:background="@mipmap/load_bg">
+    android:background="@drawable/load_bg">
 </android.support.constraint.ConstraintLayout>

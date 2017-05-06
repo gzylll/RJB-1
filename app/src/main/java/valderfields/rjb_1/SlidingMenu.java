@@ -94,7 +94,6 @@ public class SlidingMenu extends HorizontalScrollView {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent mv)
     {
-        Log.e("onInterceptTouchEvent",String.valueOf(isSliding));
         return isSliding;
     }
 
@@ -117,13 +116,11 @@ public class SlidingMenu extends HorizontalScrollView {
                     this.smoothScrollTo(mMenuWidth, 0);
                     isOpen = false;
                     SetStatus(false);
-                    Log.e("onTouchEvent","SlidingMenu:SetStatus:false");
                 } else
                 {
                     this.smoothScrollTo(0, 0);
                     isOpen = true;
                     SetStatus(true);
-                    Log.e("onTouchEvent","SlidingMenu:SetStatus:true");
                 }
                 return true;
         }

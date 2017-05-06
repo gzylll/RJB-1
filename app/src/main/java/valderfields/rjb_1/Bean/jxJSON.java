@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 解析JSON数据
  * Created by 11650 on 2017/4/15.
@@ -30,23 +33,23 @@ public class jxJSON {
         }
     }
 
-    /*
-    public static Image[] jxImageReturn(String data){
-        Image[] images;
+    public static List<Image> jxImageReturn(String data){
+        List<Image> images = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(data);
             JSONArray imageArray = jsonObject.getJSONArray("images");
-            images = new Image[imageArray.length()];
             for (int i=0;i<imageArray.length();i++) {
                 JSONObject o = (JSONObject) imageArray.get(i);
                 Image image = new Image();
                 image.Url=o.getString("url");
-                image.tags=o.getString("tags").split(",");
+                if(o.has("tags")){
+                    image.tags=o.getString("tags").split(",");
+                }
+                images.add(image);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return images;
     }
-    */
 }
