@@ -9,9 +9,11 @@ import android.graphics.Bitmap;
 
 public class Image {
 
-    public String[] tags;
+    public String[] Tags;
     public String Url;
     public Bitmap bitmap;
     public String time;
+    public String Name;
+    public String Id;
 
 }

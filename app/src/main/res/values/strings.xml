@@ -14,4 +14,7 @@
     <string name="skip">跳过</string>
     <string name="submit">提交</string>
     <string name="area">区域</string>
+    <string name="tips">选择输入标签或者选择标签</string>
+    <string name="choose">已有标签</string>
+    <string name="nonetags">没有标签</string>
 </resources>

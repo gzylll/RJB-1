@@ -1,7 +1,6 @@
-package valderfields.rjb_1.Adapter;
+package valderfields.rjb_1;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,15 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.loopj.android.image.SmartImageView;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import valderfields.rjb_1.Bean.Image;
+import valderfields.rjb_1.ImageClickListener;
 import valderfields.rjb_1.R;
 
 /**
@@ -28,24 +24,24 @@ import valderfields.rjb_1.R;
 
 public class ViewPagerAdapter extends PagerAdapter{
 
-    //显示的数据
-    private List<Image> dataList = new ArrayList<>();
     //显示的View,复用
     private LinkedList<View> mViewCache = null;
     private Context context;
     private LayoutInflater mLayoutInflater = null;
+    //View点击事件监听
+    private ImageClickListener listener;
 
-    public ViewPagerAdapter(Context context){
+    public ViewPagerAdapter(Context context,ImageClickListener listener){
         super();
         this.context=context;
-        dataList.add(new Image());
         this.mLayoutInflater=LayoutInflater.from(context);
         this.mViewCache=new LinkedList<>();
+        this.listener = listener;
     }
 
     @Override
     public int getCount() {
-        return dataList.size();
+        return ImageData.imageList.size();
     }
 
     /**
@@ -63,7 +59,7 @@ public class ViewPagerAdapter extends PagerAdapter{
             convertView = this.mLayoutInflater.inflate(R.layout.items_viewpager , null ,false);
             ImageView imageView= (ImageView)convertView.findViewById(R.id.view_pager_item_ImageView);
             //将监听给ImageCLickListener
-            imageView.setOnClickListener(ImageClickListener.getInstance(context));
+            imageView.setOnClickListener(listener);
             ProgressBar loading = (ProgressBar)convertView.findViewById(R.id.view_pager_item_Loading);
             viewHolder = new ViewHolder();
             viewHolder.mImage = imageView;
@@ -74,12 +70,11 @@ public class ViewPagerAdapter extends PagerAdapter{
             viewHolder = (ViewHolder)convertView.getTag();
         }
         //填数据
-        Log.i("ceshi",String.valueOf(dataList.size()));
-        if(dataList.get(position).bitmap!=null){
+        if(ImageData.imageList.get(position).bitmap!=null){
             Log.i("shuju",String.valueOf(position));
             viewHolder.loading.setVisibility(View.GONE);
             viewHolder.mImage.setVisibility(View.VISIBLE);
-            viewHolder.mImage.setImageBitmap(dataList.get(position).bitmap);
+            viewHolder.mImage.setImageBitmap(ImageData.imageList.get(position).bitmap);
         }
         else{
             viewHolder.loading.setVisibility(View.VISIBLE);
@@ -115,10 +110,6 @@ public class ViewPagerAdapter extends PagerAdapter{
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view==object;
-    }
-
-    public void Update(List<Image> images) {
-        dataList = images;
     }
 
     private final class ViewHolder{

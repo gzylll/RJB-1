@@ -1,9 +1,8 @@
-package valderfields.rjb_1.Adapter;
+package valderfields.rjb_1;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.view.ViewPager;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,6 +11,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
@@ -21,52 +21,42 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import valderfields.rjb_1.Activity.ImageActivity;
 import valderfields.rjb_1.Bean.Image;
 import valderfields.rjb_1.Bean.NetUtil;
 import valderfields.rjb_1.Bean.jxJSON;
 
 /**
- * Image界面逻辑,监控滑动，加载数据。
- * Created by 11650 on 2017/5/6.
+ * Created by 11650 on 2017/5/8.
  */
 
-public class ImagePresenter extends Observable implements ViewPager.OnPageChangeListener {
+public class ImageData extends Observable{
 
-    public List<Image> images = new ArrayList<>();
+    public static List<Image> imageList = new ArrayList<>();
     private Context context;
 
-    public ImagePresenter(Context context,ViewPager pager){
+    public void init(Context context){
         this.context = context;
-        pager.addOnPageChangeListener(this);
-    }
-
-
-    /**
-     * 启动事务，第一次加载图片。
-     */
-    public void start() {
+        Image image = new Image();
+        imageList.add(image);
         getData();
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        if(position==images.size()-1){
-            //getData();
+    public void update(List<Image> images){
+        imageList.remove(imageList.size()-1);
+        for (Image image: images) {
+            imageList.add(image);
         }
+        Image image = new Image();
+        imageList.add(image);
     }
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
+    public void Remove(int position){
 
     }
-
 
     public void getData(){
+        Log.e("getData","getData Start at:"+new Date().toString());
         final RequestBody body = new FormBody.Builder().build();
         new Thread() {
             public void run() {
@@ -81,10 +71,12 @@ public class ImagePresenter extends Observable implements ViewPager.OnPageChange
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         if(response.code()!=200){
+                            Looper.prepare();
                             Toast.makeText(context,"请求错误",Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            images = jxJSON.jxImageReturn(response.body().string());
+                            Log.e("getData","getData End at:"+new Date().toString());
+                            List<Image> images = jxJSON.jxImageReturn(response.body().string());
                             getBitmap(images);
                         }
                     }
@@ -98,7 +90,8 @@ public class ImagePresenter extends Observable implements ViewPager.OnPageChange
      * @param images 图片列表
      * @throws IOException IO异常
      */
-    public void getBitmap(List<Image> images) throws IOException {
+    private void getBitmap(List<Image> images) throws IOException {
+        Log.e("getData","getBitmap Start at:"+new Date().toString());
         for(int i=0;i<images.size();i++){
             URL url = new URL(images.get(i).Url);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -109,7 +102,10 @@ public class ImagePresenter extends Observable implements ViewPager.OnPageChange
                 images.get(i).bitmap = BitmapFactory.decodeStream(inputStream);
             }
         }
+        Log.e("getData","getBitmap End at:"+new Date().toString());
+        update(images);
         setChanged();
-        notifyObservers(images);
+        notifyObservers();
     }
+
 }

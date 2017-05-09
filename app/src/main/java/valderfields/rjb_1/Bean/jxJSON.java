@@ -43,8 +43,10 @@ public class jxJSON {
                 Image image = new Image();
                 image.Url=o.getString("url");
                 if(o.has("tags")){
-                    image.tags=o.getString("tags").split(",");
+                    image.Tags=o.getString("tags").split(",");
                 }
+                image.Name = o.getString("name");
+                image.Id = o.getString("id");
                 images.add(image);
             }
         } catch (JSONException e) {
