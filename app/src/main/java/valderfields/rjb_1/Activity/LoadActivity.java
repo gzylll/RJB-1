@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import valderfields.rjb_1.Bean.User;
 import valderfields.rjb_1.R;
 
 public class LoadActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class LoadActivity extends AppCompatActivity {
             }
         },1000);
         //初始化
+        User.init(this);
         //登录检测,用户自动登录或者已登录跳转至主界面
     }
 }

@@ -52,7 +52,9 @@ public class ImageData extends Observable{
     }
 
     public void Remove(int position){
-
+        imageList.remove(position);
+        setChanged();
+        notifyObservers();
     }
 
     public void getData(){
@@ -64,8 +66,8 @@ public class ImageData extends Observable{
                 NetUtil.getOkHttpClient().newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        Log.i("Register", "Failure");
-                        Log.i("Register", e.getMessage());
+                        Log.i("getData", "Failure");
+                        Log.i("getData", e.getMessage());
                     }
 
                     @Override

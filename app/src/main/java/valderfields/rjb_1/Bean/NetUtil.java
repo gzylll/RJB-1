@@ -40,6 +40,10 @@ public class NetUtil {
      */
     final private static String requestImageUrl = localHost+"/ImageDistributeServlet";
     /**
+     * 提交标签的Url
+     */
+    final private static String submitTagUrl = localHost+"/ImageReceiveServlet";
+    /**
      * 获得带有cookie管理的对象
      * @return 对象
      */
@@ -57,6 +61,10 @@ public class NetUtil {
 
     public static String getRequestImageUrl() {
         return requestImageUrl;
+    }
+
+    public static String getSubmitTagUrl() {
+        return submitTagUrl;
     }
 
     /**

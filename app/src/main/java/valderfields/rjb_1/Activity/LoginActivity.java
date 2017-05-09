@@ -20,6 +20,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import valderfields.rjb_1.Bean.EncodeUtil;
 import valderfields.rjb_1.Bean.NetUtil;
+import valderfields.rjb_1.Bean.User;
 import valderfields.rjb_1.R;
 import valderfields.rjb_1.Bean.jxJSON;
 
@@ -49,7 +50,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         remPWD = (CheckBox)findViewById(R.id.rempwn);
+        if(User.getRemember()){
+            remPWD.setChecked(true);
+            username.setText(User.getUsername());
+            password.setText(User.getPassword());
+        }
         autoLogin = (CheckBox)findViewById(R.id.autologin);
+        if(User.getAuto())
+            autoLogin.setChecked(true);
         getSupportActionBar().setTitle("登录");
     }
 
@@ -57,11 +65,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String un = username.getText().toString().trim();
         String pw = password.getText().toString().trim();
         if(!un.equals("")&&!pw.equals("")){
+            if(remPWD.isChecked()){
+                User.setUsername(un);
+                User.setPassword(EncodeUtil.shaEncode(pw));
+                User.setRemember(true);
+            }
+            if(autoLogin.isChecked()){
+                User.setAuto(true);
+            }
             //登录
-            final RequestBody requestBody = new FormBody.Builder()
-                    .add("username",un)
-                    .add("password", EncodeUtil.shaEncode(pw))
-                    .build();
+            final RequestBody requestBody;
+            if(remPWD.isChecked()){
+                requestBody = new FormBody.Builder()
+                        .add("username",un)
+                        .add("password", pw)
+                        .build();
+            }
+            else{
+                requestBody = new FormBody.Builder()
+                        .add("username",un)
+                        .add("password", EncodeUtil.shaEncode(pw))
+                        .build();
+            }
 
             new Thread(){
                 public void run(){
@@ -75,8 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
-                            //Log.i("Login",response.body().string());
-                            jxJSON.Ceshi(response.body().string());
+                            jxJSON.jxLoginData(response.body().string());
                         }
                     });
                 }
@@ -97,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent = new Intent(this,RegisterActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.activity_out,R.anim.activity_in);
                 break;
         }
     }

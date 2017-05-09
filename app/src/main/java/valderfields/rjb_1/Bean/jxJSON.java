@@ -16,18 +16,15 @@ import java.util.List;
 
 public class jxJSON {
 
-    /*
-    public static User jxLoginData(String data){
-        User user;
-        return user;
-    }
-    */
-    public static void Ceshi(String data){
+    public static void jxLoginData(String data){
+        Log.i("return",data);
         try {
             JSONObject jsonObject = new JSONObject(data);
             JSONObject jsonObject1 = jsonObject.getJSONObject("user");
-            Log.i("password",jsonObject1.getString("password"));
-            Log.i("phone",jsonObject1.getString("phone"));
+            User.setUID(jsonObject1.getString("uid"));
+            User.setEmail(jsonObject1.getString("email"));
+            User.setPhone(jsonObject1.getString("phone"));
+            User.setUsername(jsonObject1.getString("username"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -42,11 +39,15 @@ public class jxJSON {
                 JSONObject o = (JSONObject) imageArray.get(i);
                 Image image = new Image();
                 image.Url=o.getString("url");
+                image.Name = o.getString("name");
+                image.Id = o.getString("id");
                 if(o.has("tags")){
                     image.Tags=o.getString("tags").split(",");
                 }
-                image.Name = o.getString("name");
-                image.Id = o.getString("id");
+                else{
+                    image.Tags=new String[]{"yi","啦啦","测试","test"};
+
+                }
                 images.add(image);
             }
         } catch (JSONException e) {
