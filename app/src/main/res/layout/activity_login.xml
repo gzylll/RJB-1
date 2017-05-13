@@ -4,82 +4,183 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
-    tools:context="valderfields.rjb_1.Activity.LoginActivity">
-
-    <LinearLayout
-        android:id="@+id/user_login"
+    android:padding="20dp"
+    android:background="@drawable/bg_login"
+    tools:context="valderfields.rjb_1.View.Activity.LoginActivity">
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!--用户名-->
-        <android.support.design.widget.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/username"
-                android:inputType="text"
-                android:hint="@string/editUserName"/>
-
-        </android.support.design.widget.TextInputLayout>
-        <!--密码-->
-        <android.support.design.widget.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/password"
-                android:inputType="textPassword"
-                android:hint="@string/editPassword"/>
-
-        </android.support.design.widget.TextInputLayout>
-
+        android:id="@+id/container">
+        <!--登录-->
         <LinearLayout
+            android:id="@+id/user_login"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <!--标题-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/rempwn"
-                android:text="@string/rememberPwn" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"
+                    android:text="@string/loginTitle"/>
 
-            <CheckBox
-                android:text="@string/autoLogin"
-                android:layout_weight="1"
-                android:layout_width="0dp"
+            </LinearLayout>
+
+            <!--用户名-->
+            <android.support.design.widget.TextInputLayout
                 android:layout_height="wrap_content"
-                android:id="@+id/autologin" />
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/username"
+                    android:inputType="text"
+                    android:hint="@string/editUserName"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <!--密码-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/password"
+                    android:inputType="textPassword"
+                    android:hint="@string/editPassword"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <CheckBox
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rempwn"
+                    android:text="@string/rememberPwn" />
+
+                <CheckBox
+                    android:text="@string/autoLogin"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/autologin" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/dl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textSize="18sp"
+                android:background="@drawable/login_button_style"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/zc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="end"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/registerNewUser"/>
 
         </LinearLayout>
+        <!--注册-->
+        <LinearLayout
+            android:id="@+id/user_register"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--返回-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:id="@+id/backToLogin"/>
+            <!--标题-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NewUser"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="30sp"/>
+            <!--用户名-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp">
 
-    <Button
-        android:id="@+id/dl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textSize="18sp"
-        android:background="@drawable/circle_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/username_register"
+                    android:inputType="text"
+                    android:hint="@string/editUserName"/>
 
-    <Button
-        android:id="@+id/zc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:background="@drawable/circle_button"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
+            </android.support.design.widget.TextInputLayout>
+            <!--密码-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp">
 
-    </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/password_register"
+                    android:inputType="textPassword"
+                    android:hint="@string/editPassword"/>
 
+            </android.support.design.widget.TextInputLayout>
+            <!--确认密码-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/password_reedit"
+                    android:inputType="textPassword"
+                    android:hint="@string/editPassword2"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <!--注册-->
+            <Button
+                android:id="@+id/ZC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:background="@drawable/login_button_style"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="15dp"/>
+        </LinearLayout>
+    </FrameLayout>
 </RelativeLayout>

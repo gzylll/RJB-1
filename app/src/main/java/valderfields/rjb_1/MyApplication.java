@@ -1,10 +1,10 @@
 package valderfields.rjb_1;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
-import valderfields.rjb_1.Bean.User;
+import valderfields.rjb_1.Model.User;
 
 /**
  * MyApplication
@@ -12,7 +12,7 @@ import valderfields.rjb_1.Bean.User;
  */
 
 public class MyApplication extends Application {
-    public User user;
-    private SharedPreferences sharedPreferences;
+
+
 
 }

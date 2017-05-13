@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Bean;
+package valderfields.rjb_1.Model;
 
 import android.util.Log;
 
@@ -16,17 +16,21 @@ import java.util.List;
 
 public class jxJSON {
 
-    public static void jxLoginData(String data){
-        Log.i("return",data);
-        try {
-            JSONObject jsonObject = new JSONObject(data);
-            JSONObject jsonObject1 = jsonObject.getJSONObject("user");
-            User.setUID(jsonObject1.getString("uid"));
-            User.setEmail(jsonObject1.getString("email"));
-            User.setPhone(jsonObject1.getString("phone"));
-            User.setUsername(jsonObject1.getString("username"));
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public static boolean jxLoginData(String data){
+        if(data.equals("wrong"))
+            return false;
+        else{
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                JSONObject jsonObject1 = jsonObject.getJSONObject("user");
+                User.setUID(jsonObject1.getString("uid"));
+                User.setEmail(jsonObject1.getString("email"));
+                User.setPhone(jsonObject1.getString("phone"));
+                User.setUsername(jsonObject1.getString("username"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        return true;
         }
     }
 

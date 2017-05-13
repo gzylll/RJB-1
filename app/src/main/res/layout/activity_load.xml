@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="valderfields.rjb_1.Activity.LoadActivity"
+    tools:context="valderfields.rjb_1.View.Activity.LoadActivity"
     android:background="@drawable/load_bg">
 </android.support.constraint.ConstraintLayout>

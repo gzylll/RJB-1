@@ -5,7 +5,7 @@
     <!--圆角-->
     <corners android:radius="60dp"/>
     <!--填充颜色-->
-    <solid android:color="@android:color/white"/>
+    <solid android:color="#87cefa"/>
     <!--描边-->
     <stroke
         android:color="@color/colorPrimary"

@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.View.CustomView;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
-import valderfields.rjb_1.Bean.Image;
-import valderfields.rjb_1.ImageClickListener;
+import valderfields.rjb_1.Presenter.ImageDataPresenter;
+import valderfields.rjb_1.Presenter.ImagePresenter;
 import valderfields.rjb_1.R;
 
 /**
@@ -29,9 +27,9 @@ public class ViewPagerAdapter extends PagerAdapter{
     private Context context;
     private LayoutInflater mLayoutInflater = null;
     //View点击事件监听
-    private ImageClickListener listener;
+    private ImagePresenter listener;
 
-    public ViewPagerAdapter(Context context,ImageClickListener listener){
+    public ViewPagerAdapter(Context context,ImagePresenter listener){
         super();
         this.context=context;
         this.mLayoutInflater=LayoutInflater.from(context);
@@ -41,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter{
 
     @Override
     public int getCount() {
-        return ImageData.imageList.size();
+        return ImageDataPresenter.imageList.size();
     }
 
     /**
@@ -70,11 +68,11 @@ public class ViewPagerAdapter extends PagerAdapter{
             viewHolder = (ViewHolder)convertView.getTag();
         }
         //填数据
-        if(ImageData.imageList.get(position).bitmap!=null){
+        if(ImageDataPresenter.imageList.get(position).bitmap!=null){
             Log.i("shuju",String.valueOf(position));
             viewHolder.loading.setVisibility(View.GONE);
             viewHolder.mImage.setVisibility(View.VISIBLE);
-            viewHolder.mImage.setImageBitmap(ImageData.imageList.get(position).bitmap);
+            viewHolder.mImage.setImageBitmap(ImageDataPresenter.imageList.get(position).bitmap);
         }
         else{
             viewHolder.loading.setVisibility(View.VISIBLE);

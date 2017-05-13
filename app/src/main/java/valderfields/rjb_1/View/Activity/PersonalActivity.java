@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Activity;
+package valderfields.rjb_1.View.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -7,14 +6,19 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <!--弹出窗口动画样式~底部-->
     <style name="popwindow_bottom_anim">
         <item name="android:windowEnterAnimation">@anim/popshow_bottom_anim</item>
         <item name="android:windowExitAnimation">@anim/pophidden_bottom_anim</item>
     </style>
-
+    <!--弹出窗口动画样式~顶部-->
     <style name="popwindow_top_anim">
         <item name="android:windowEnterAnimation">@anim/popshow_top_anim</item>
         <item name="android:windowExitAnimation">@anim/pophidden_top_anim</item>
+    </style>
+    <!--侧拉框字体样式-->
+    <style name="SlidingStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">25sp</item>
     </style>
 </resources>

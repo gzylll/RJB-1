@@ -1,14 +1,17 @@
-package valderfields.rjb_1.Activity;
+package valderfields.rjb_1.View.Activity;
 
+import android.content.Intent;
 import android.os.Looper;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,47 +22,67 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import valderfields.rjb_1.Bean.NetUtil;
-import valderfields.rjb_1.Bean.User;
-import valderfields.rjb_1.Bean.jxJSON;
-import valderfields.rjb_1.ImageClickListener;
-import valderfields.rjb_1.ImageData;
-import valderfields.rjb_1.Bean.Image;
-import valderfields.rjb_1.PageTransformer;
+import valderfields.rjb_1.Model.NetUtil;
+import valderfields.rjb_1.Model.User;
+import valderfields.rjb_1.Presenter.ImagePresenter;
+import valderfields.rjb_1.Presenter.ImageDataPresenter;
+import valderfields.rjb_1.Model.Image;
+import valderfields.rjb_1.View.CustomView.PageTransformer;
 import valderfields.rjb_1.R;
-import valderfields.rjb_1.ViewPagerAdapter;
-import valderfields.rjb_1.SlidingMenu;
+import valderfields.rjb_1.View.CustomView.SlidingMenu;
+import valderfields.rjb_1.View.CustomView.ViewPagerAdapter;
 
-public class ImageActivity extends AppCompatActivity implements Observer,ViewPager.OnPageChangeListener{
+public class ImageActivity extends AppCompatActivity implements
+                Observer,ViewPager.OnPageChangeListener,View.OnClickListener{
 
     private ViewPagerAdapter adapter;
-    private ImageData imageData;
-    private ImageClickListener listener;
+    private ImageDataPresenter imageDataPresenter;
+    private ImagePresenter presenter;
     private int position = 0;
     private boolean first = true;
+
+    private TextView name;
+    private View myInfo;
+    private View Quit;
+    private View myRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
         getSupportActionBar().hide();
-        //初始化主界面元素
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         final SlidingMenu menu = (SlidingMenu)findViewById(R.id.menu);
-        //初始化viewPager数据
-        imageData = new ImageData();
-        imageData.init(this);
-        imageData.addObserver(this);
+        presenter = new ImagePresenter(this);
+        presenter.SetSlidingMenu(menu);
+        presenter.addObserver(this);
+        initView();
+        initViewPager();
+    }
+
+    private void initView(){
+        name = (TextView)findViewById(R.id.myName);
+        name.setText(User.getUsername());
+        myInfo = findViewById(R.id.myInfo);
+        myInfo.setOnClickListener(this);
+        Quit = findViewById(R.id.Quit);
+        Quit.setOnClickListener(this);
+        myRecord = findViewById(R.id.myRecord);
+        myRecord.setOnClickListener(this);
+    }
+
+    private void initViewPager(){
         //初始化viewPager
-        listener = new ImageClickListener(this);
-        adapter = new ViewPagerAdapter(this, listener);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        //初始化viewPager数据
+        imageDataPresenter = new ImageDataPresenter();
+        imageDataPresenter.init(this);
+        imageDataPresenter.addObserver(this);
+        adapter = new ViewPagerAdapter(this, presenter);
         viewPager.setPageTransformer(true,new PageTransformer());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(this);
-        listener.SetSlidingMenu(menu);
-        listener.addObserver(this);
-    }
 
+    }
     /**
      * 接收presenter传来的更新图片，并通知adapter更新
      * @param o Observable
@@ -68,22 +91,22 @@ public class ImageActivity extends AppCompatActivity implements Observer,ViewPag
     @Override
     @SuppressWarnings("unchecked")
     public void update(Observable o, Object arg) {
-        if(o instanceof ImageData){
+        if(o instanceof ImageDataPresenter){
             final List<Image> images = (List<Image>)arg;
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if(first){
-                        listener.UpdateViewData(0);
+                        presenter.UpdateViewData(0);
                         first = false;
                     }
                     adapter.notifyDataSetChanged();
                 }
             });
         }
-        else if(o instanceof ImageClickListener){
+        else if(o instanceof ImagePresenter){
             if(arg.equals("skip")){
-                imageData.Remove(position);
+                imageDataPresenter.Remove(position);
                 this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -105,11 +128,11 @@ public class ImageActivity extends AppCompatActivity implements Observer,ViewPag
     @Override
     public void onPageSelected(int position) {
         this.position = position;
-        if((ImageData.imageList.size()- position)<=3){
-            imageData.getData();
+        if((ImageDataPresenter.imageList.size()- position)<=3){
+            imageDataPresenter.getData();
         }
         //更新弹出框数据
-        listener.UpdateViewData(this.position);
+        presenter.UpdateViewData(this.position);
     }
 
     @Override
@@ -118,7 +141,7 @@ public class ImageActivity extends AppCompatActivity implements Observer,ViewPag
     }
 
     public void submitTag(int position,String tag){
-        Image image = ImageData.imageList.get(position);
+        Image image = ImageDataPresenter.imageList.get(position);
         final RequestBody body = new FormBody.Builder()
                 .add("tags",tag)
                 .add("id",image.Id)
@@ -146,5 +169,23 @@ public class ImageActivity extends AppCompatActivity implements Observer,ViewPag
                 });
             }
         }.start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch(v.getId()){
+            case R.id.myInfo:
+                intent = new Intent(this,PersonalActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.Quit:
+                intent = new Intent(this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.myRecord:
+                break;
+        }
     }
 }

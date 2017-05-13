@@ -17,18 +17,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ImageActivity" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.LoadActivity">
+        android:theme="@style/AppTheme"
+        android:name=".MyApplication">
+        <activity android:name=".View.Activity.ImageActivity" />
+        <activity android:name=".View.Activity.LoginActivity" />
+        <activity android:name=".View.Activity.LoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.PersonalActivity"></activity>
+        <activity android:name=".View.Activity.PersonalActivity"></activity>
     </application>
 
 </manifest>

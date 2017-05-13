@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Presenter;
 
 import android.content.Context;
 import android.util.Log;
@@ -16,14 +16,16 @@ import android.widget.Toast;
 
 import java.util.Observable;
 
-import valderfields.rjb_1.Bean.Image;
+import valderfields.rjb_1.Model.Image;
+import valderfields.rjb_1.R;
+import valderfields.rjb_1.View.CustomView.SlidingMenu;
 
 /**
  * Image界面点击处理类
  * Created by 11650 on 2017/5/4.
  */
 
-public class ImageClickListener extends Observable implements View.OnClickListener{
+public class ImagePresenter extends Observable implements View.OnClickListener{
     //上下文
     public Context context;
     //点击之后的弹出框和状态
@@ -45,8 +47,8 @@ public class ImageClickListener extends Observable implements View.OnClickListen
     private Button skip;
     private Button submit;
 
-    public ImageClickListener(Context context){
-        Log.e("ImageClickListener","Create");
+    public ImagePresenter(Context context){
+        Log.e("ImagePresenter","Create");
         this.context = context;
         mLayoutInflater = LayoutInflater.from(context);
         popTopView = mLayoutInflater.inflate(R.layout.image_popwindow_top, null, false);
@@ -81,7 +83,7 @@ public class ImageClickListener extends Observable implements View.OnClickListen
      * @param position 当前选中的数据项
      */
     public void UpdateViewData(int position){
-        Image cImage = ImageData.imageList.get(position);
+        Image cImage = ImageDataPresenter.imageList.get(position);
         imageName.setText(cImage.Name);
         if(cImage.Tags!=null){
             noneTags.setVisibility(View.GONE);
@@ -93,7 +95,7 @@ public class ImageClickListener extends Observable implements View.OnClickListen
                 lp.setMargins(10,5,10,5);
                 b.setLayoutParams(lp);
                 b.setTextSize(0,30);
-                b.setBackground(context.getResources().getDrawable(R.drawable.circle_button));
+                b.setBackground(context.getResources().getDrawable(R.drawable.circle_button_nomal));
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

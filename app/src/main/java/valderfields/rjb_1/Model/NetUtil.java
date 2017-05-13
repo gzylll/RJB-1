@@ -1,14 +1,4 @@
-package valderfields.rjb_1.Bean;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.CookieManager;
-import java.net.HttpURLConnection;
-import java.net.URL;
+package valderfields.rjb_1.Model;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

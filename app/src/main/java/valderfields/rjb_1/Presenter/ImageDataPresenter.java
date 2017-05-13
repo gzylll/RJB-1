@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.Presenter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -21,16 +21,15 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import valderfields.rjb_1.Activity.ImageActivity;
-import valderfields.rjb_1.Bean.Image;
-import valderfields.rjb_1.Bean.NetUtil;
-import valderfields.rjb_1.Bean.jxJSON;
+import valderfields.rjb_1.Model.Image;
+import valderfields.rjb_1.Model.NetUtil;
+import valderfields.rjb_1.Model.jxJSON;
 
 /**
  * Created by 11650 on 2017/5/8.
  */
 
-public class ImageData extends Observable{
+public class ImageDataPresenter extends Observable{
 
     public static List<Image> imageList = new ArrayList<>();
     private Context context;

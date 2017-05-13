@@ -1,25 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_image"
+    android:padding="25dp">
+    <!--用户名-->
     <TextView
+        android:id="@+id/myName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        android:text="用户名"/>
+    <!--个人信息-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="菜单1"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:id="@+id/myInfo">
 
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/info"/>
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/SlidingStyle"
+            android:text="@string/person"/>
+    </LinearLayout>
+    <!--历史记录-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="菜单2"/>
+        android:orientation="horizontal"
+        android:id="@+id/myRecord"
+        android:layout_marginTop="15dp">
 
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/record"/>
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/SlidingStyle"
+            android:text="@string/record"/>
+    </LinearLayout>
+    <!--退出登录-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="菜单3"/>
+        android:orientation="horizontal"
+        android:id="@+id/Quit"
+        android:layout_marginTop="15dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="菜单4"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/quit"/>
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/SlidingStyle"
+            android:text="@string/quit"/>
+    </LinearLayout>
+
 </LinearLayout>

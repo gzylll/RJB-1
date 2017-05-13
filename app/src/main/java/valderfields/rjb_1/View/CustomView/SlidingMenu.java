@@ -1,4 +1,4 @@
-package valderfields.rjb_1;
+package valderfields.rjb_1.View.CustomView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -53,7 +53,7 @@ public class SlidingMenu extends HorizontalScrollView {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(dm);
         mScreenWidth = dm.widthPixels;
-        mMenuRightPadding = 100;
+        mMenuRightPadding = 300;
     }
 
     public SlidingMenu(Context context)
@@ -137,7 +137,7 @@ public class SlidingMenu extends HorizontalScrollView {
         //缩放
         mMenu.setScaleX(leftScale);
         mMenu.setScaleY(leftScale);
-        mMenu.setAlpha(0.6f + 0.4f * (1 - scale));
+        mMenu.setAlpha(1.0f * (1 - scale));
         mMenu.setTranslationX(mMenuWidth * scale * 0.6f);
         //设定缩放的中心轴
         mContent.setPivotX(0);

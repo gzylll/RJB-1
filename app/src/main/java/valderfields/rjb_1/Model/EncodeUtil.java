@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Bean;
+package valderfields.rjb_1.Model;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

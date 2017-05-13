@@ -1,9 +1,7 @@
-package valderfields.rjb_1.Bean;
+package valderfields.rjb_1.Model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import java.io.Serializable;
 
 /**
  *
@@ -100,4 +98,8 @@ public class User{
         editor.commit();
     }
 
+    public static void clear(){
+        editor.clear();
+        editor.commit();
+    }
 }
