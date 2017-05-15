@@ -19,6 +19,7 @@
     <!--侧拉框字体样式-->
     <style name="SlidingStyle">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
     </style>
 </resources>

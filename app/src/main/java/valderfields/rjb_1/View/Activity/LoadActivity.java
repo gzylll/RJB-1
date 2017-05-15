@@ -25,7 +25,7 @@ public class LoadActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },1000);
+        },3000);
         //初始化
         User.init(this);
         //登录检测,用户自动登录或者已登录跳转至主界面
