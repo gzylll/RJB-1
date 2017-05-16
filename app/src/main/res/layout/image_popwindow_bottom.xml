@@ -42,6 +42,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
             android:orientation="vertical">
             <!--提示-->
             <TextView
@@ -56,7 +58,6 @@
                 android:id="@+id/TagArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:visibility="visible">
 
             </valderfields.rjb_1.View.CustomView.FlowLayout>

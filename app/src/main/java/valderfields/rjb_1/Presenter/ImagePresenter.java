@@ -93,12 +93,15 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
             tagsArea.setVisibility(View.GONE);
         }
         else{
+            noneTags.setVisibility(View.GONE);
+            tagsArea.setVisibility(View.VISIBLE);
+            tagsArea.removeAllViews();
             for(int i=0;i<cImage.Tags.length;i++){
                 final Button b = new Button(context);
                 ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 ViewGroup.MarginLayoutParams mlp = new ViewGroup.MarginLayoutParams(lp);
-                mlp.setMargins(15,10,15,10);
+                mlp.setMargins(10,5,10,5);
                 b.setLayoutParams(mlp);
                 b.setText(cImage.Tags[i]);
                 //b.setBackground(context.getResources().getDrawable(R.drawable.tag_button));
