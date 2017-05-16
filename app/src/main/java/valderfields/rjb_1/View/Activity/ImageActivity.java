@@ -1,11 +1,14 @@
 package valderfields.rjb_1.View.Activity;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Switch;
@@ -46,6 +49,21 @@ public class ImageActivity extends AppCompatActivity implements
     private View myInfo;
     private View Quit;
     private View myRecord;
+
+   private Handler handler = new Handler(){
+       @Override
+       public void handleMessage(Message msg) {
+            Bundle b = msg.getData();
+            if(b.getBoolean("onResponse",false)){
+                imageDataPresenter.Remove(position);
+                adapter.notifyDataSetChanged();
+                presenter.closePopwindow();
+            }
+            else {
+                Toast.makeText(ImageActivity.this,"提交错误",Toast.LENGTH_SHORT).show();
+            }
+       }
+   };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +160,7 @@ public class ImageActivity extends AppCompatActivity implements
 
     }
 
-    public void submitTag(int position,String tag){
+    public void submitTag(final int position, String tag){
         Image image = ImageDataPresenter.imageList.get(position);
         final RequestBody body = new FormBody.Builder()
                 .add("tags",tag)
@@ -163,10 +181,16 @@ public class ImageActivity extends AppCompatActivity implements
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+                        Bundle bundle = new Bundle();
                         if(response.code()!=200){
-                            Looper.prepare();
-                            Toast.makeText(ImageActivity.this,"提交错误",Toast.LENGTH_SHORT).show();
+                            bundle.putBoolean("onResponse",false);
                         }
+                        else{
+                            bundle.putBoolean("onResponse",true);
+                        }
+                        Message message = handler.obtainMessage();
+                        message.setData(bundle);
+                        handler.sendMessage(message);
                     }
                 });
             }
@@ -222,4 +246,5 @@ public class ImageActivity extends AppCompatActivity implements
                 return false;
         }
     }
+
 }
