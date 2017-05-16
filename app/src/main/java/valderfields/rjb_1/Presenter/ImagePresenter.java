@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -18,6 +20,7 @@ import java.util.Observable;
 
 import valderfields.rjb_1.Model.Image;
 import valderfields.rjb_1.R;
+import valderfields.rjb_1.View.CustomView.FlowLayout;
 import valderfields.rjb_1.View.CustomView.SlidingMenu;
 
 /**
@@ -43,7 +46,7 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
     //bottom组件
     private EditText inputTag;
     private TextView noneTags;
-    private LinearLayout tagsArea;
+    private FlowLayout tagsArea;
     private Button skip;
     private Button submit;
 
@@ -64,7 +67,7 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
                 WindowManager.LayoutParams.WRAP_CONTENT);
         inputTag = (EditText)popBottomView.findViewById(R.id.tags);
         noneTags = (TextView)popBottomView.findViewById(R.id.nonetags);
-        tagsArea = (LinearLayout)popBottomView.findViewById(R.id.TagArea);
+        tagsArea = (FlowLayout)popBottomView.findViewById(R.id.TagArea);
         skip = (Button)popBottomView.findViewById(R.id.skip);
         skip.setOnClickListener(this);
         submit = (Button)popBottomView.findViewById(R.id.submit);
@@ -85,17 +88,20 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
     public void UpdateViewData(int position){
         Image cImage = ImageDataPresenter.imageList.get(position);
         imageName.setText(cImage.Name);
-        if(cImage.Tags!=null){
-            noneTags.setVisibility(View.GONE);
+        if(cImage.Tags==null){
+            noneTags.setVisibility(View.VISIBLE);
+            tagsArea.setVisibility(View.GONE);
+        }
+        else{
             for(int i=0;i<cImage.Tags.length;i++){
                 final Button b = new Button(context);
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.MarginLayoutParams mlp = new ViewGroup.MarginLayoutParams(lp);
+                mlp.setMargins(15,10,15,10);
+                b.setLayoutParams(mlp);
                 b.setText(cImage.Tags[i]);
-                LinearLayout.LayoutParams  lp = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,90);
-                lp.setMargins(10,5,10,5);
-                b.setLayoutParams(lp);
-                b.setTextSize(0,30);
-                b.setBackground(context.getResources().getDrawable(R.drawable.circle_button_nomal));
+                //b.setBackground(context.getResources().getDrawable(R.drawable.tag_button));
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

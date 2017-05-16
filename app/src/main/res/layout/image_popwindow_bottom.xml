@@ -10,8 +10,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@android:color/transparent"
         android:padding="10dp">
         <!--提示-->
         <TextView
@@ -48,25 +49,25 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:textSize="16sp"
-                android:text="@string/choose" />
-            <!--标签显示区域-->
-            <LinearLayout
+                android:text="@string/choose"
+                android:textSize="16sp" />
+            <!--标签显示区域流式布局-->
+            <valderfields.rjb_1.View.CustomView.FlowLayout
                 android:id="@+id/TagArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                >
-                <!--默认显示-->
-                <TextView
-                    android:id="@+id/nonetags"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nonetags" />
+                android:layout_margin="10dp"
+                android:visibility="visible">
 
-            </LinearLayout>
+            </valderfields.rjb_1.View.CustomView.FlowLayout>
+
+            <!--默认显示-->
+            <TextView
+                android:id="@+id/nonetags"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nonetags" />
 
         </LinearLayout>
 

@@ -95,10 +95,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void Login(){
         String un = username_Login.getText().toString().trim();
         String pw = password_Login.getText().toString().trim();
+        pw=(pw.length()==40)?pw:EncodeUtil.shaEncode(pw);
         if(!un.equals("")&&!pw.equals("")){
             if(remPWD.isChecked()){
                 User.setUsername(un);
-                User.setPassword(EncodeUtil.shaEncode(pw));
+                User.setPassword(pw);
                 User.setRemember(true);
             }
             else{
@@ -109,13 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 User.setAuto(true);
             }
             //登录
-            final RequestBody requestBody;
-            if(remPWD.isChecked()){
-                presenter.Login(un,pw);
-            }
-            else{
-               presenter.Login(un,EncodeUtil.shaEncode(pw));
-            }
+            presenter.Login(un,pw);
         }
         else{
             Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_SHORT).show();
@@ -128,12 +123,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String pwd2 = password2_Register.getText().toString();
         if(name.equals("")||pwd1.equals("")||pwd2.equals("")){
             Toast.makeText(this,"输入不能为空",Toast.LENGTH_SHORT).show();
-            return;
         }
-        if(pwd1.equals(pwd2)){
-            presenter.Register(name,pwd1);
-        } else {
+        else if(!pwd1.equals(pwd2)){
             Toast.makeText(this,"密码不一致",Toast.LENGTH_SHORT).show();
+        }
+        else if(pwd1.length()>20) {
+            Toast.makeText(this,"密码不超过20位",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            presenter.Register(name,pwd1);
         }
     }
 

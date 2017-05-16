@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import valderfields.rjb_1.View.CustomView.SlidingMenu;
 import valderfields.rjb_1.View.CustomView.ViewPagerAdapter;
 
 public class ImageActivity extends AppCompatActivity implements
-                Observer,ViewPager.OnPageChangeListener,View.OnClickListener{
+                Observer,ViewPager.OnPageChangeListener,View.OnClickListener,View.OnTouchListener{
 
     private ViewPagerAdapter adapter;
     private ImageDataPresenter imageDataPresenter;
@@ -64,6 +65,7 @@ public class ImageActivity extends AppCompatActivity implements
         name.setText(User.getUsername());
         myInfo = findViewById(R.id.myInfo);
         myInfo.setOnClickListener(this);
+        myInfo.setOnTouchListener(this);
         Quit = findViewById(R.id.Quit);
         Quit.setOnClickListener(this);
         myRecord = findViewById(R.id.myRecord);
@@ -173,9 +175,11 @@ public class ImageActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
+        Log.e("onTouchEvent","Click");
         Intent intent;
         switch(v.getId()){
             case R.id.myInfo:
+                Toast.makeText(this,"Click myInfo",Toast.LENGTH_SHORT).show();
                 intent = new Intent(this,PersonalActivity.class);
                 startActivity(intent);
                 break;
@@ -186,6 +190,36 @@ public class ImageActivity extends AppCompatActivity implements
                 break;
             case R.id.myRecord:
                 break;
+        }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.e("onTouchEvent", "Touch");
+        Intent intent;
+        int action = event.getAction();
+        switch (action){
+            case MotionEvent.ACTION_DOWN:
+                Log.e("action down here","ontouch");
+                return false;
+            case MotionEvent.ACTION_UP:
+                switch (v.getId()) {
+                    case R.id.myInfo:
+                        Toast.makeText(this, "Click myInfo", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(this, PersonalActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.Quit:
+                        intent = new Intent(this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.myRecord:
+                        break;
+                }
+                return true;
+            default:
+                return false;
         }
     }
 }

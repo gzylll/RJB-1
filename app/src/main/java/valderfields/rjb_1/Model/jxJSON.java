@@ -49,8 +49,8 @@ public class jxJSON {
                     image.Tags=o.getString("tags").split(",");
                 }
                 else{
-                    image.Tags=new String[]{"yi","啦啦","测试","test"};
-
+                    image.Tags=new String[]{"yi","啦啦","测试","test","lalalalalalalala","lalalalalalalala"
+                    ,"lalalalalalalala"};
                 }
                 images.add(image);
             }
