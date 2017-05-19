@@ -1,6 +1,7 @@
 package valderfields.rjb_1.Presenter;
 
 import android.content.Context;
+import android.graphics.drawable.PaintDrawable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,7 +37,7 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
     private View popTopView;
     private PopupWindow bottom;
     private View popBottomView;
-    private boolean isShow = false;
+    public boolean isShow = false;
     private LayoutInflater mLayoutInflater;
     //slidingmenu
     private SlidingMenu slinding;
@@ -55,16 +56,33 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
         this.context = context;
         mLayoutInflater = LayoutInflater.from(context);
         popTopView = mLayoutInflater.inflate(R.layout.image_popwindow_top, null, false);
+        //popTopView.setFocusable(true);
         popBottomView = mLayoutInflater.inflate(R.layout.image_popwindow_bottom, null, false);
+        //popBottomView.setFocusable(true);
         //TOP
         top = new PopupWindow(popTopView, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
+        top.setBackgroundDrawable(context.getResources().getDrawable(android.R.color.transparent));
+        //top.setFocusable(true);
+        top.setOutsideTouchable(true);
         toPerson = (ImageButton) popTopView.findViewById(R.id.toPerson);
         toPerson.setOnClickListener(this);
         imageName = (TextView)popTopView.findViewById(R.id.image_name);
+        top.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                if(!bottom.isTouchable())
+                    bottom.dismiss();
+            }
+        });
+
         //BOTTOM
         bottom = new PopupWindow(popBottomView, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
+        bottom.setBackgroundDrawable(context.getResources().getDrawable(android.R.color.transparent));
+        bottom.setOutsideTouchable(true);
+        bottom.setFocusable(true);
+        bottom.setBackgroundDrawable(new PaintDrawable());
         inputTag = (EditText)popBottomView.findViewById(R.id.tags);
         noneTags = (TextView)popBottomView.findViewById(R.id.nonetags);
         tagsArea = (FlowLayout)popBottomView.findViewById(R.id.TagArea);
@@ -123,14 +141,11 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
                 setPopWindow(v);
                 break;
             case R.id.toPerson:
-                isShow = false;
-                top.dismiss();
-                bottom.dismiss();
+                closePopwindow();
                 slinding.toggle();
                 break;
             case R.id.skip:
-                top.dismiss();
-                bottom.dismiss();
+                closePopwindow();
                 setChanged();
                 notifyObservers("skip");
                 break;
@@ -164,19 +179,20 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
             //设置menu位置在底部
             bottom.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             bottom.showAtLocation(v, Gravity.BOTTOM,0,0);
-            bottom.setOutsideTouchable(true);
-            bottom.setFocusable(true);
-            bottom.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
             bottom.setAnimationStyle(R.style.popwindow_bottom_anim);
             bottom.update();
 
             //设置title位置在顶部
             top.showAtLocation(v, Gravity.TOP,0,0);
-            top.setFocusable(false);
-            top.setOutsideTouchable(true);
             top.setAnimationStyle(R.style.popwindow_top_anim);
             top.update();
             isShow = true;
         }
+    }
+
+    public void closePopwindow(){
+        top.dismiss();
+        bottom.dismiss();
+        isShow=false;
     }
 }

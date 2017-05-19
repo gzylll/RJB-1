@@ -29,10 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.Activity.PersonalActivity"
-                  android:parentActivityName=".View.Activity.ImageActivity"
-            android:label="@string/personal_info"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:parentActivityName=".View.Activity.ImageActivity"></activity>
     </application>
 
 </manifest>
