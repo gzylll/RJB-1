@@ -130,57 +130,120 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:textSize="30sp"/>
-            <!--用户名-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_height="wrap_content"
+            <!--手机号验证部分-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/registerPhone">
 
-                <EditText
+                <!--手机号-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/number"
+                        android:inputType="number"
+                        android:hint="@string/editUserPhone"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/username_register"
-                    android:inputType="text"
-                    android:hint="@string/editUserName"/>
+                    android:orientation="horizontal">
 
-            </android.support.design.widget.TextInputLayout>
-            <!--密码-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:hint="@string/editYZM"
+                        android:id="@+id/yzm" />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/getyzm"
+                        android:text="@string/getYZM" />
+                </LinearLayout>
 
-                <EditText
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/password_register"
-                    android:inputType="textPassword"
-                    android:hint="@string/editPassword"/>
+                    android:id="@+id/submitYZM"
+                    android:text="@string/YZ"
+                    android:background="@drawable/login_button_style"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="15dp"/>
+            </LinearLayout>
 
-            </android.support.design.widget.TextInputLayout>
-            <!--确认密码-->
-            <android.support.design.widget.TextInputLayout
-                android:layout_height="wrap_content"
+            <!--除手机号以外的其他部分-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content"
+                android:id="@+id/registerMessage"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <EditText
+                <!--用户名-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/username_register"
+                        android:inputType="text"
+                        android:hint="@string/editUserName"/>
+
+                </android.support.design.widget.TextInputLayout>
+                <!--密码-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/password_register"
+                        android:inputType="textPassword"
+                        android:hint="@string/editPassword"/>
+
+                </android.support.design.widget.TextInputLayout>
+                <!--确认密码-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/password_reedit"
+                        android:inputType="textPassword"
+                        android:hint="@string/editPassword2"/>
+
+                </android.support.design.widget.TextInputLayout>
+                <!--注册-->
+                <Button
+                    android:id="@+id/ZC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/password_reedit"
-                    android:inputType="textPassword"
-                    android:hint="@string/editPassword2"/>
+                    android:text="@string/register"
+                    android:background="@drawable/login_button_style"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="15dp"/>
 
-            </android.support.design.widget.TextInputLayout>
-            <!--注册-->
-            <Button
-                android:id="@+id/ZC"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:background="@drawable/login_button_style"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="15dp"/>
+            </LinearLayout>
+
         </LinearLayout>
     </FrameLayout>
 </RelativeLayout>
