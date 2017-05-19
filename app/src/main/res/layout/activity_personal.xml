@@ -22,7 +22,7 @@
         <View style="@style/bg_line"/>
         <LinearLayout style="@style/mid_layout">
             <TextView style="@style/usertext" android:text="@string/phone" />
-            <TextView style="@style/usercontext" android:id="@+id/i_phone" android:text="18361226976"/>
+            <TextView style="@style/usercontext" android:id="@+id/i_phone" android:text="18361277736"/>
         </LinearLayout>
         <View style="@style/bg_line"/>
         <!-- 下圆角-->
