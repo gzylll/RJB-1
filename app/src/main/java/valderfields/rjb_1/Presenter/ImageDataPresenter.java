@@ -23,6 +23,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import valderfields.rjb_1.Model.Image;
 import valderfields.rjb_1.Model.NetUtil;
+import valderfields.rjb_1.Model.User;
 import valderfields.rjb_1.Model.jxJSON;
 
 /**
@@ -58,7 +59,9 @@ public class ImageDataPresenter extends Observable{
 
     public void getData(){
         Log.e("getData","getData Start at:"+new Date().toString());
-        final RequestBody body = new FormBody.Builder().build();
+        final RequestBody body = new FormBody.Builder()
+                .add("uid", User.getUID())
+                .build();
         new Thread() {
             public void run() {
                 Request request = NetUtil.getRequest(NetUtil.getRequestImageUrl(), body);

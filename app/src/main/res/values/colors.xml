@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorRed">#FFFC121E</color>
+    <!-- 描边颜色 -->
+    <color name="border_clo">#ccc</color>
+    <color name="text_clo">#333</color>
+    <color name="text_clo_context">#a3a1a1</color>
+    <color name="white">#fff</color>
+    <color name="blue">#419DE4</color>
 </resources>

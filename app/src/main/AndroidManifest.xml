@@ -28,7 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Activity.PersonalActivity"></activity>
+        <activity android:name=".View.Activity.PersonalActivity"
+                  android:parentActivityName=".View.Activity.ImageActivity"
+            android:label="@string/personal_info"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

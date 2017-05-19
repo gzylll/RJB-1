@@ -1,109 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              tools:context="valderfields.rjb_1.View.Activity.PersonalActivity">
+    <LinearLayout style="@style/wrap_layout" >
+        <!-- 上圆角-->
+        <LinearLayout style="@style/top_layout">
+            <TextView style="@style/usertext" android:text="@string/UID" />
+            <TextView style="@style/usercontext" android:id="@+id/uid" android:text="001"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <!-- 分割线 -->
+        <View style="@style/bg_line"/>
+        <!-- 无圆角-->
+        <LinearLayout style="@style/mid_layout">
+            <TextView style="@style/usertext" android:text="@string/username" />
+            <TextView style="@style/usercontext" android:id="@+id/i_name" android:text="ttw"/>
+        </LinearLayout>
+        <View style="@style/bg_line"/>
+        <LinearLayout style="@style/mid_layout">
+            <TextView style="@style/usertext" android:text="@string/phone" />
+            <TextView style="@style/usercontext" android:id="@+id/i_phone" android:text="18361226976"/>
+        </LinearLayout>
+        <View style="@style/bg_line"/>
+        <!-- 下圆角-->
+        <LinearLayout style="@style/bottom_layout">
+            <TextView style="@style/usertext" android:text="@string/sex" />
+            <TextView style="@style/usercontext" android:id="@+id/i_sex" android:text="女"/>
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/toBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:background="#00000000"
-            android:src="@drawable/back"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="个人信息"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="20dp"
-        android:text="昵称"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ffffff"
-        />
+    <!-- 全圆角-->
+    <LinearLayout style="@style/wrap_layout">
+        <LinearLayout style="@style/single_layout">
+            <TextView style="@style/usertext" android:text="@string/hobby" />
+            <TextView style="@style/usercontext" android:id="@+id/i_hobby" android:text="听歌 运动"/>
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="20dp"
-        android:text="电话"/>
+        <LinearLayout style="@style/single_layout">
+            <TextView style="@style/usertext" android:text="@string/signnature" />
+            <TextView style="@style/usercontext" android:id="@+id/i_signnature" android:text="不忘初心"/>
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ffffff"
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:text="邮箱"
-        android:textSize="20dp"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ffffff"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="20dp"
-        android:text="密码"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ffffff"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="20dp"
-        android:text="兴趣爱好"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ffffff"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="20dp"
-        android:text="个性签名"/>
+    </LinearLayout>
 
 </LinearLayout>
