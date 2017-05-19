@@ -52,7 +52,6 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
     private Button submit;
 
     public ImagePresenter(Context context){
-        Log.e("ImagePresenter","Create");
         this.context = context;
         mLayoutInflater = LayoutInflater.from(context);
         popTopView = mLayoutInflater.inflate(R.layout.image_popwindow_top, null, false);

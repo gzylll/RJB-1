@@ -1,22 +1,27 @@
 package valderfields.rjb_1.View.Activity;
 
 import android.content.Intent;
-import android.os.Looper;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.Observable;
 import java.util.Observer;
 
-import okhttp3.RequestBody;
+import cn.smssdk.SMSSDK;
 import valderfields.rjb_1.Model.EncodeUtil;
 import valderfields.rjb_1.Model.User;
 import valderfields.rjb_1.Presenter.LoginPresenter;
@@ -28,6 +33,7 @@ import valderfields.rjb_1.View.CustomView.Rotate3DAnimation;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener,Observer{
 
+    String TAG = "LoginActivity";
     //login
     private Button bLogin;
     private TextView register;
@@ -36,11 +42,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox remPWD,autoLogin;
     private View loginView;
     //register
+    private View PhoneView;
+    private EditText mEditTextPhoneNumber;
+    private EditText mEditTextCode;
+    private Button mButtonGetCode;
+    private Button mButtonSubmitYZM;
+    private View OtherView;
+
     private TextView cancel;
     private EditText username_Register;
     private EditText password_Register;
     private EditText password2_Register;
-    private Button bRegister;
+    private Button mButtonRegister;
     private View registerView;
 
     private LoginPresenter presenter;
@@ -49,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private float centerX;
     private float centerY;
     private float Z = 0.0f;
+
+    private String strPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initRegisterView();
         presenter = new LoginPresenter(this);
         presenter.addObserver(this);
+        presenter.initSDK();
         container = findViewById(R.id.container);
     }
 
@@ -82,14 +98,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initRegisterView(){
+        PhoneView = findViewById(R.id.registerPhone);
+        OtherView = findViewById(R.id.registerMessage);
         registerView = findViewById(R.id.user_register);
+
         cancel = (TextView)findViewById(R.id.backToLogin);
         cancel.setOnClickListener(this);
+        mEditTextPhoneNumber = (EditText)findViewById(R.id.number);
+        mEditTextCode = (EditText)findViewById(R.id.yzm);
         username_Register = (EditText) findViewById(R.id.username_register);
         password_Register = (EditText) findViewById(R.id.password_register);
         password2_Register = (EditText) findViewById(R.id.password_reedit);
-        bRegister = (Button) findViewById(R.id.ZC);
-        bRegister.setOnClickListener(this);
+        mButtonRegister = (Button) findViewById(R.id.ZC);
+        mButtonGetCode = (Button)findViewById(R.id.getyzm);
+        mButtonGetCode.setOnClickListener(this);
+        mButtonSubmitYZM = (Button)findViewById(R.id.submitYZM);
+        mButtonSubmitYZM.setOnClickListener(this);
+        mButtonRegister.setOnClickListener(this);
     }
 
     private void Login(){
@@ -131,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this,"密码不超过20位",Toast.LENGTH_SHORT).show();
         }
         else{
-            presenter.Register(name,pwd1);
+            presenter.Register(name,pwd1,strPhoneNumber);
         }
     }
 
@@ -150,9 +175,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.backToLogin:
                 Rotate3DTo(2);
                 break;
+            case R.id.getyzm:
+                strPhoneNumber = mEditTextPhoneNumber.getText().toString();
+                if ("".equals(strPhoneNumber) || strPhoneNumber.length() != 11) {
+                    Toast.makeText(LoginActivity.this, "电话号码输入有误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                SMSSDK.getVerificationCode("86", strPhoneNumber);
+                mButtonGetCode.setClickable(false);
+                //开启线程去更新button的text
+                presenter.updateButton();
+                break;
+            case R.id.submitYZM:
+                String strCode = mEditTextCode.getText().toString();
+                if (null != strCode && strCode.length() == 4) {
+                    Log.d(TAG, mEditTextCode.getText().toString());
+                    SMSSDK.submitVerificationCode("86", strPhoneNumber, mEditTextCode.getText().toString());
+                } else {
+                    Toast.makeText(LoginActivity.this, "密码长度不正确", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
-
 
     @Override
     public void update(Observable o, Object arg) {
@@ -239,4 +283,66 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }
     }
+
+    private void updateRegisterView(){
+        PhoneView.setVisibility(View.GONE);
+        OtherView.setVisibility(View.VISIBLE);
+        PhoneView.setAnimation(AnimationUtils.makeOutAnimation(this, false));
+        // 向右边移入
+        OtherView.setAnimation(AnimationUtils.makeInAnimation(this, false));
+
+    }
+
+    public Handler myHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0x00:
+                    int event = msg.arg1;
+                    int result = msg.arg2;
+                    Object data = msg.obj;
+                    if (result == SMSSDK.RESULT_COMPLETE) {
+                        //回调  当返回的结果是complete
+                        if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                            //获取验证码
+                            Toast.makeText(LoginActivity.this, "发送验证码成功", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "get verification code successful.");
+                        } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                            //提交验证码
+                            Log.d(TAG, "submit code successful");
+                            Toast.makeText(LoginActivity.this, "提交验证码成功", Toast.LENGTH_SHORT).show();
+                            updateRegisterView();
+                        } else {
+                            Log.d(TAG, data.toString());
+                        }
+                    } else {
+                        //进行操作出错，通过下面的信息区分析错误原因
+                        try {
+                            Throwable throwable = (Throwable) data;
+                            throwable.printStackTrace();
+                            JSONObject object = new JSONObject(throwable.getMessage());
+                            String des = object.optString("detail");//错误描述
+                            int status = object.optInt("status");//错误代码
+                            //错误代码：
+                            // http://wiki.mob.com/android-api-%E9%94%99%E8%AF%AF%E7%A0%81%E5%8F%82%E8%80%83/
+                            Log.e(TAG, "status: " + status + ", detail: " + des);
+                            if (status > 0 && !TextUtils.isEmpty(des)) {
+                                Toast.makeText(LoginActivity.this, des, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+                case 0x01:
+                    mButtonGetCode.setText("重新发送(" + msg.arg1 + ")");
+                    break;
+                case 0x02:
+                    mButtonGetCode.setText("获取验证码");
+                    mButtonGetCode.setClickable(true);
+                    break;
+            }
+        }
+    };
 }
