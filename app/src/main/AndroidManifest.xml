@@ -45,9 +45,6 @@
         <activity
             android:name=".View.Activity.PersonalActivity"
             android:parentActivityName=".View.Activity.ImageActivity" />
-        <activity android:name=".View.Activity.TestSMSActivity">
-
-        </activity>
     </application>
 
 </manifest>

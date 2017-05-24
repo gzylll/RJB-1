@@ -15,7 +15,7 @@ public class NetUtil {
     /**
      * localHost
      */
-    final private static String localHost = "http://123.206.214.198:8080/ImageSortServer";
+    final private static String localHost = "http://114.115.142.214:8080/ImageSortServer";
     /**
      * 登录的url
      */

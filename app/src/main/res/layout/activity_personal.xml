@@ -9,18 +9,23 @@
         <!-- 上圆角-->
         <LinearLayout style="@style/top_layout">
             <TextView style="@style/usertext" android:text="@string/UID" />
-            <TextView style="@style/usercontext" android:id="@+id/uid" android:text="001"/>
+            <TextView style="@style/usercontext" android:id="@+id/uid" />
         </LinearLayout>
 
         <!-- 分割线 -->
         <View style="@style/bg_line"/>
-        <!-- 无圆角-->
-        <LinearLayout style="@style/mid_layout">
+        <!-- 用户名-->
+        <LinearLayout
+            style="@style/mid_layout"
+            android:id="@+id/cUserName"
+            android:onClick="OnClickPersonal">
             <TextView style="@style/usertext" android:text="@string/username" />
             <TextView style="@style/usercontext" android:id="@+id/i_name" android:text="ttw"/>
         </LinearLayout>
         <View style="@style/bg_line"/>
-        <LinearLayout style="@style/mid_layout">
+
+        <LinearLayout
+            style="@style/mid_layout">
             <TextView style="@style/usertext" android:text="@string/phone" />
             <TextView style="@style/usercontext" android:id="@+id/i_phone" android:text="18361277736"/>
         </LinearLayout>
@@ -35,13 +40,14 @@
 
 
     <!-- 全圆角-->
-    <LinearLayout style="@style/wrap_layout">
+    <LinearLayout
+        style="@style/wrap_layout">
         <LinearLayout style="@style/single_layout">
             <TextView style="@style/usertext" android:text="@string/hobby" />
             <TextView style="@style/usercontext" android:id="@+id/i_hobby" android:text="听歌 运动"/>
         </LinearLayout>
 
-        <LinearLayout style="@style/single_layout">
+        <LinearLayout style="@style/bottom_layout">
             <TextView style="@style/usertext" android:text="@string/signnature" />
             <TextView style="@style/usercontext" android:id="@+id/i_signnature" android:text="不忘初心"/>
         </LinearLayout>
