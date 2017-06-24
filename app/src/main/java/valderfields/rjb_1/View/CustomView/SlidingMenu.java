@@ -30,7 +30,7 @@ public class SlidingMenu extends HorizontalScrollView {
     private int mMenuWidth;
     private int mHalfMenuWidth;
     //是否已显示菜单
-    private boolean isOpen;
+    public boolean isOpen;
 
     private boolean once;
 

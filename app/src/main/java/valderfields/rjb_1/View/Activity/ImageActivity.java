@@ -219,17 +219,14 @@ public class ImageActivity extends AppCompatActivity implements
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.e("onTouchEvent", "Touch");
         Intent intent;
         int action = event.getAction();
         switch (action){
             case MotionEvent.ACTION_DOWN:
-                Log.e("action down here","ontouch");
                 return false;
             case MotionEvent.ACTION_UP:
                 switch (v.getId()) {
                     case R.id.myInfo:
-                        Toast.makeText(this, "Click myInfo", Toast.LENGTH_SHORT).show();
                         intent = new Intent(this, PersonalActivity.class);
                         startActivity(intent);
                         break;
@@ -239,6 +236,9 @@ public class ImageActivity extends AppCompatActivity implements
                         finish();
                         break;
                     case R.id.myRecord:
+                        intent = new Intent(this, HistoryActivity.class);
+                        startActivity(intent);
+                        finish();
                         break;
                 }
                 return true;

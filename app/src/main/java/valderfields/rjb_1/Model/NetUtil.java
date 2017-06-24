@@ -34,6 +34,11 @@ public class NetUtil {
      */
     final private static String submitTagUrl = localHost+"/ImageReceiveServlet";
     /**
+     * 获得标签历史的Url
+     */
+    final private static String getTagHistoryUrl = localHost+"/QueryRecords";
+
+    /**
      * 获得带有cookie管理的对象
      * @return 对象
      */
@@ -57,6 +62,9 @@ public class NetUtil {
         return submitTagUrl;
     }
 
+    public static String getGetTagHistoryUrl(){
+        return getTagHistoryUrl;
+    }
     /**
      * 获得请求函数
      * @param url  请求url

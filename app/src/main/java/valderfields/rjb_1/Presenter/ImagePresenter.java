@@ -135,32 +135,35 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.view_pager_item_ImageView:
-                setPopWindow(v);
-                break;
-            case R.id.toPerson:
-                closePopwindow();
-                slinding.toggle();
-                break;
-            case R.id.skip:
-                closePopwindow();
-                setChanged();
-                notifyObservers("skip");
-                break;
-            case R.id.submit:
-                String tag = inputTag.getText().toString();
-                if(!tag.equals("")){
-                    inputTag.setText("");
+        if(slinding.isOpen){
+            slinding.toggle();
+        }else{
+            switch (v.getId()){
+                case R.id.view_pager_item_ImageView:
+                    setPopWindow(v);
+                    break;
+                case R.id.toPerson:
+                    closePopwindow();
+                    slinding.toggle();
+                    break;
+                case R.id.skip:
+                    closePopwindow();
                     setChanged();
-                    notifyObservers(tag);
-                }
-                else{
-                    Toast.makeText(context,"标签不能为空",Toast.LENGTH_SHORT).show();
-                }
-                break;
+                    notifyObservers("skip");
+                    break;
+                case R.id.submit:
+                    String tag = inputTag.getText().toString();
+                    if(!tag.equals("")){
+                        inputTag.setText("");
+                        setChanged();
+                        notifyObservers(tag);
+                    }
+                    else{
+                        Toast.makeText(context,"标签不能为空",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
         }
-
     }
 
     /**
