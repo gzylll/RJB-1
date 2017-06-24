@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">图片分类系统</string>
+    <string name="app_name">LFP</string>
     <string name="personal_info">个人信息</string>
     <!--登录注册界面-->
     <string name="login">登录</string>
@@ -39,5 +39,11 @@
     <string name="sex">性别</string>
     <string name="hobby">兴趣爱好</string>
     <string name="signnature">个性签名</string>
+    <!--历史记录-->
+    <string name="pictureID">PID:</string>
+    <string name="name">图片名称:</string>
+    <string name="myLabel">我的标签:</string>
+    <string name="isAccepted">是否接受:</string>
+    <string name="time">标注时间:</string>
 
 </resources>

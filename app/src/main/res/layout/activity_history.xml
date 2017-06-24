@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context="valderfields.rjb_1.View.Activity.HistoryActivity">
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userList"
+        android:layout_margin="10dp"
+        android:divider="@color/border_clo"
+        android:dividerHeight="1dp">
+    </ListView>
 </android.support.constraint.ConstraintLayout>

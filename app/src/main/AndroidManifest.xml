@@ -44,8 +44,11 @@
         </activity>
         <activity
             android:name=".View.Activity.PersonalActivity"
+            android:label="@string/personal_info"
             android:parentActivityName=".View.Activity.ImageActivity" />
-        <activity android:name=".View.Activity.HistoryActivity"></activity>
+        <activity android:name=".View.Activity.HistoryActivity"
+            android:label="历史记录"
+            android:parentActivityName=".View.Activity.ImageActivity"/>
     </application>
 
 </manifest>
