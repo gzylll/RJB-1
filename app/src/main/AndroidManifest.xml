@@ -33,8 +33,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".view.activity.ImageActivity" />
-        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.ImageActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".view.activity.LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".view.activity.LoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,10 +47,12 @@
         <activity
             android:name=".view.activity.PersonalActivity"
             android:label="@string/personal_info"
-            android:parentActivityName=".view.activity.ImageActivity" />
+            android:parentActivityName=".view.activity.ImageActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".view.activity.HistoryActivity"
             android:label="历史记录"
-            android:parentActivityName=".view.activity.ImageActivity"/>
+            android:parentActivityName=".view.activity.ImageActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>
