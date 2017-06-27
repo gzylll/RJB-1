@@ -23,7 +23,6 @@ public class User{
     private static String _email;
     private static String _password;
     private static Boolean _isRemember;
-    private static Boolean _isAuto;
     private static String session;
     private static String hobbies;
     private static int Score;
@@ -80,7 +79,6 @@ public class User{
         _username = preferences.getString("username","");
         _password = preferences.getString("password","");
         _isRemember = preferences.getBoolean("isR",false);
-        _isAuto = preferences.getBoolean("isA",false);
     }
 
 
@@ -137,16 +135,6 @@ public class User{
     public static void setRemember(Boolean remember) {
         _isRemember = remember;
         editor.putBoolean("isR",remember);
-        editor.commit();
-    }
-
-    public static Boolean getAuto() {
-        return _isAuto;
-    }
-
-    public static void setAuto(Boolean auto) {
-        _isAuto = auto;
-        editor.putBoolean("isA",auto);
         editor.commit();
     }
 

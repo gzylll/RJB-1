@@ -142,6 +142,7 @@ public class ImageActivity extends AppCompatActivity implements
                         first = false;
                     }
                     adapter.notifyDataSetChanged();
+                    presenter.UpdateViewData(position);
                 }
             });
         }

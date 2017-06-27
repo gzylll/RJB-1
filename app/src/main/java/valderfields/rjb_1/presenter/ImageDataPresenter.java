@@ -45,48 +45,16 @@ public class ImageDataPresenter extends Observable{
     }
 
     public void update(List<Image> images){
-        Log.e("Start","-------------------------------");
-        String s = "";
-        for(int i=0;i<imageList.size();i++){
-            if(imageList.get(i).bitmap==null){
-                s+="0";
-            }else{
-                s+="1";
-            }
-        }
-        Log.e("BeforUpdate",s);
         imageList.remove(imageList.size()-1);
-        s = "";
-        for(int i=0;i<imageList.size();i++){
-            if(imageList.get(i).bitmap==null){
-                s+="0";
-            }else{
-                s+="1";
-            }
-        }
-        Log.e("AfterRemove",s);
         imageList.addAll(images);
-        s = "";
         for(int i=0;i<imageList.size();i++){
             if(imageList.get(i).bitmap==null){
-                s+="0";
-            }else{
-                s+="1";
+                imageList.remove(i);
+                i--;
             }
         }
-        Log.e("AfterAdd",s);
         Image image = new Image();
         imageList.add(image);
-        s = "";
-        for(int i=0;i<imageList.size();i++){
-            if(imageList.get(i).bitmap==null){
-                s+="0";
-            }else{
-                s+="1";
-            }
-        }
-        Log.e("AfterUpdate",s);
-        Log.e("End","-------------------------------");
     }
 
     public void Remove(int position){

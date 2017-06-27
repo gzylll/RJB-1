@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView register;
     private EditText username_Login;
     private EditText password_Login;
-    private CheckBox remPWD,autoLogin;
+    private CheckBox remPWD;
     private View loginView;
     //register
     private View PhoneView;
@@ -92,9 +92,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             username_Login.setText(User.getUsername());
             password_Login.setText(User.getPassword());
         }
-        autoLogin = (CheckBox)findViewById(R.id.autologin);
-        if(User.getAuto())
-            autoLogin.setChecked(true);
     }
 
     private void initRegisterView(){
@@ -130,9 +127,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             else{
                 User.clear();
                 User.setUsername(un);
-            }
-            if(autoLogin.isChecked()){
-                User.setAuto(true);
             }
             //登录
             Log.e("Login","un:"+un+",pw:"+pw);
