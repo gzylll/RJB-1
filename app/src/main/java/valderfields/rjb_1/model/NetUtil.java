@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Model;
+package valderfields.rjb_1.model;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -37,13 +37,30 @@ public class NetUtil {
      * 获得标签历史的Url
      */
     final private static String getTagHistoryUrl = localHost+"/QueryRecords";
+    /**
+     * 获得接收的数组的Url
+     */
+    final private static String getReceivedUrl = localHost+"/QueryReceiveTags";
+    /**
+     * 获得接收的数组的Url
+     */
+    final private static String getUpdateUrl = localHost+"/UpdateTag";
+    /**
+     * 获得积分的Url
+     */
+    final private static String getScoreUrl = localHost+"/UpdateScore";
 
+    final private static String getUpdateUserInfoUrl = localHost+"/UpdateUser";
     /**
      * 获得带有cookie管理的对象
      * @return 对象
      */
     public static OkHttpClient getOkHttpClient() {
         return PersonalOkHttpCilent;
+    }
+
+    public static String getLocalHost() {
+        return localHost;
     }
 
     public static String getLoginUrl(){
@@ -65,6 +82,23 @@ public class NetUtil {
     public static String getGetTagHistoryUrl(){
         return getTagHistoryUrl;
     }
+
+    public static String getGetReceivedUrl() {
+        return getReceivedUrl;
+    }
+
+    public static String getGetUpdateUrl() {
+        return getUpdateUrl;
+    }
+
+    public static String getGetScoreUrl() {
+        return getScoreUrl;
+    }
+
+    public static String getGetUpdateUserInfoUrl() {
+        return getUpdateUserInfoUrl;
+    }
+
     /**
      * 获得请求函数
      * @param url  请求url
@@ -74,6 +108,14 @@ public class NetUtil {
     public static Request getRequest(String url, RequestBody requestBody)
     {
         return new Request.Builder().url(url).post(requestBody).build();
+    }
+
+    public static Request getRequestWithSession(String url, RequestBody requestBody)
+    {
+        return new Request.Builder()
+                          .addHeader("Cookie",User.getSession().split(";")[0])
+                          .url(url).post(requestBody)
+                          .build();
     }
 
 }

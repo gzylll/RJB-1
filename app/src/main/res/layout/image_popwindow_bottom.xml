@@ -54,13 +54,13 @@
                 android:text="@string/choose"
                 android:textSize="16sp" />
             <!--标签显示区域流式布局-->
-            <valderfields.rjb_1.View.CustomView.FlowLayout
+            <valderfields.rjb_1.view.customView.FlowLayout
                 android:id="@+id/TagArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible">
 
-            </valderfields.rjb_1.View.CustomView.FlowLayout>
+            </valderfields.rjb_1.view.customView.FlowLayout>
 
             <!--默认显示-->
             <TextView

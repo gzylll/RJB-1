@@ -36,8 +36,9 @@
     <string name="UID">UID</string>
     <string name="username">用户名</string>
     <string name="phone">手机号</string>
-    <string name="sex">性别</string>
+    <string name="email">邮箱</string>
     <string name="hobby">兴趣爱好</string>
+    <string name="changeMM">修改说明：点击右上角修改按钮，在弹出框中输入要修改的内容项，可不填。修改完成后点击完成提交修改</string>
     <string name="signnature">个性签名</string>
     <!--历史记录-->
     <string name="pictureID">PID:</string>
@@ -45,5 +46,19 @@
     <string name="myLabel">我的标签:</string>
     <string name="isAccepted">是否接受:</string>
     <string name="time">标注时间:</string>
+    <string name="change">修改</string>
+    <string name="complete">完成</string>
+    <string name="refresh">刷新</string>
+    <string name="Submit">提 交</string>
+    <string name="Yes">确定</string>
+    <string name="No">取消</string>
+    <string name="changeTag">修改标签</string>
+    <string name="LOADING">正在加载图片，这可能需要一段时间，请稍后</string>
+    <string name="Score">我的积分</string>
+    <string name="process">任务进度</string>
+    <string name="editUserInfo">修改用户信息</string>
+    <string name="cem">修改用户邮箱（可不填）</string>
+    <string name="cnb">修改用户爱好（可不填）</string>
+    <string name="cmm">修改密码（可不填）</string>
 
 </resources>

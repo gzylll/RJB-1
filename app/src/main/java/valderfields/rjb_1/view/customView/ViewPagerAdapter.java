@@ -1,18 +1,16 @@
-package valderfields.rjb_1.View.CustomView;
+package valderfields.rjb_1.view.customView;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import java.util.LinkedList;
 
-import valderfields.rjb_1.Presenter.ImageDataPresenter;
-import valderfields.rjb_1.Presenter.ImagePresenter;
+import valderfields.rjb_1.presenter.ImageDataPresenter;
+import valderfields.rjb_1.presenter.ImagePresenter;
 import valderfields.rjb_1.R;
 
 /**
@@ -58,7 +56,7 @@ public class ViewPagerAdapter extends PagerAdapter{
             ImageView imageView= (ImageView)convertView.findViewById(R.id.view_pager_item_ImageView);
             //将监听给ImageCLickListener
             imageView.setOnClickListener(listener);
-            ProgressBar loading = (ProgressBar)convertView.findViewById(R.id.view_pager_item_Loading);
+            View loading = convertView.findViewById(R.id.loading);
             viewHolder = new ViewHolder();
             viewHolder.mImage = imageView;
             viewHolder.loading = loading;
@@ -69,7 +67,6 @@ public class ViewPagerAdapter extends PagerAdapter{
         }
         //填数据
         if(ImageDataPresenter.imageList.get(position).bitmap!=null){
-            Log.i("shuju",String.valueOf(position));
             viewHolder.loading.setVisibility(View.GONE);
             viewHolder.mImage.setVisibility(View.VISIBLE);
             viewHolder.mImage.setImageBitmap(ImageDataPresenter.imageList.get(position).bitmap);
@@ -112,6 +109,6 @@ public class ViewPagerAdapter extends PagerAdapter{
 
     private final class ViewHolder{
         ImageView mImage;
-        ProgressBar loading;
+        View loading;
     }
 }

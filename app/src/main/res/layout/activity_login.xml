@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:background="@drawable/bg_login"
-    tools:context="valderfields.rjb_1.View.Activity.LoginActivity">
+    tools:context="valderfields.rjb_1.view.activity.LoginActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package valderfields.rjb_1.View.Activity;
+package valderfields.rjb_1.view.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import valderfields.rjb_1.Model.User;
+import valderfields.rjb_1.model.User;
 import valderfields.rjb_1.R;
 
 public class LoadActivity extends AppCompatActivity {

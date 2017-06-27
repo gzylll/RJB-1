@@ -1,9 +1,8 @@
-package valderfields.rjb_1.View.CustomView;
+package valderfields.rjb_1.view.customView;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;

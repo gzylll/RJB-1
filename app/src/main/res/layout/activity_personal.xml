@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
-              tools:context="valderfields.rjb_1.View.Activity.PersonalActivity">
+              tools:context="valderfields.rjb_1.view.activity.PersonalActivity">
     <LinearLayout style="@style/wrap_layout" >
         <!-- 上圆角-->
         <LinearLayout style="@style/top_layout">
@@ -16,24 +16,22 @@
         <View style="@style/bg_line"/>
         <!-- 用户名-->
         <LinearLayout
-            style="@style/mid_layout"
-            android:id="@+id/cUserName"
-            android:onClick="OnClickPersonal">
+            style="@style/mid_layout">
             <TextView style="@style/usertext" android:text="@string/username" />
-            <TextView style="@style/usercontext" android:id="@+id/i_name" android:text="ttw"/>
+            <TextView style="@style/usercontext" android:id="@+id/i_name" />
         </LinearLayout>
         <View style="@style/bg_line"/>
 
         <LinearLayout
             style="@style/mid_layout">
             <TextView style="@style/usertext" android:text="@string/phone" />
-            <TextView style="@style/usercontext" android:id="@+id/i_phone" android:text="18361277736"/>
+            <TextView style="@style/usercontext" android:id="@+id/i_phone" />
         </LinearLayout>
         <View style="@style/bg_line"/>
         <!-- 下圆角-->
-        <LinearLayout style="@style/bottom_layout">
-            <TextView style="@style/usertext" android:text="@string/sex" />
-            <TextView style="@style/usercontext" android:id="@+id/i_sex" android:text="女"/>
+        <LinearLayout style="@style/bottom_layout" android:id="@+id/cem">
+            <TextView style="@style/usertext" android:text="@string/email" />
+            <TextView style="@style/usercontext" android:id="@+id/i_email" />
         </LinearLayout>
 
     </LinearLayout>
@@ -41,15 +39,21 @@
 
     <!-- 全圆角-->
     <LinearLayout
-        style="@style/wrap_layout">
+        style="@style/wrap_layout"
+        android:id="@+id/chb">
         <LinearLayout style="@style/single_layout">
             <TextView style="@style/usertext" android:text="@string/hobby" />
-            <TextView style="@style/usercontext" android:id="@+id/i_hobby" android:text="听歌 运动"/>
+            <TextView style="@style/usercontext" android:id="@+id/i_hobby" />
         </LinearLayout>
 
-        <LinearLayout style="@style/bottom_layout">
-            <TextView style="@style/usertext" android:text="@string/signnature" />
-            <TextView style="@style/usercontext" android:id="@+id/i_signnature" android:text="不忘初心"/>
+    </LinearLayout>
+
+    <!-- 全圆角-->
+    <LinearLayout
+        style="@style/wrap_layout"
+        android:id="@+id/cmm">
+        <LinearLayout style="@style/single_layout">
+            <TextView style="@style/intro" android:text="@string/changeMM" />
         </LinearLayout>
 
     </LinearLayout>

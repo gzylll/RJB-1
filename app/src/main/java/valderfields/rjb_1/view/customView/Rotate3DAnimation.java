@@ -1,10 +1,9 @@
-package valderfields.rjb_1.View.CustomView;
+package valderfields.rjb_1.view.customView;
 
 import android.graphics.Camera;
 import android.graphics.Matrix;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
 
 /**

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editUsernameArea"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_margin="10dp">
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editUserInfo"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:hint="@string/cem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:id="@+id/cem" />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:hint="@string/cnb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:id="@+id/chb" />
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="25dp"
+                android:padding="10dp"
+                android:hint="@string/cmm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:id="@+id/cmm" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/editUsernameArea">
+
+            <TextView
+                android:id="@+id/editPassword_yes"
+                android:padding="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="100"
+                android:gravity="center"
+                android:background="@drawable/bg_dialog_yes"
+                android:text="@string/Yes"/>
+
+
+            <TextView
+                android:id="@+id/editPassword_no"
+                android:padding="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="100"
+                android:gravity="center"
+                android:background="@drawable/bg_dialog_no"
+                android:text="@string/No"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

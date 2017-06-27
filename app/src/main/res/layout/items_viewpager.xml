@@ -3,19 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+    <RelativeLayout
+        android:id="@+id/loading"
         android:visibility="gone"
-        android:id="@+id/view_pager_item_Loading"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/view_pager_item_Loading"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/view_pager_item_Loading"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="@string/LOADING"/>
+
+    </RelativeLayout>
 
     <ImageView
         android:clickable="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/view_pager_item_ImageView"
         android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

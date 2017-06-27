@@ -1,7 +1,14 @@
-package valderfields.rjb_1.Model;
+package valderfields.rjb_1.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Response;
 
 /**
  *
@@ -17,6 +24,51 @@ public class User{
     private static String _password;
     private static Boolean _isRemember;
     private static Boolean _isAuto;
+    private static String session;
+    private static String hobbies;
+    private static int Score;
+
+    public static String getHobbies() {
+        return hobbies;
+    }
+
+    public static void setHobbies(String hobbies) {
+        User.hobbies = hobbies;
+    }
+
+    public static int getScore() {
+        return Score;
+    }
+
+    public static void setScore(int score) {
+        Score = score;
+    }
+
+    public static void addScore(){
+        Score+=1;
+        NetUtil.getOkHttpClient().newCall(
+                NetUtil.getRequestWithSession(
+                        NetUtil.getGetScoreUrl(),
+                        new FormBody.Builder().add("score",String.valueOf(Score)).build()
+                )
+        ).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+            }
+        });
+    }
+
+    public static String getSession() {
+        return session;
+    }
+
+    public static void setSession(String session) {
+        User.session = session;
+    }
 
     private static SharedPreferences preferences;
     private static SharedPreferences.Editor editor;

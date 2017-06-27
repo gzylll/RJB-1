@@ -1,4 +1,4 @@
-package valderfields.rjb_1.View.CustomView;
+package valderfields.rjb_1.view.customView;
 
 import android.content.Context;
 import android.util.AttributeSet;

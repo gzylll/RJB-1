@@ -1,8 +1,7 @@
-package valderfields.rjb_1.Presenter;
+package valderfields.rjb_1.presenter;
 
 import android.content.Context;
 import android.graphics.drawable.PaintDrawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,19 +9,17 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Observable;
 
-import valderfields.rjb_1.Model.Image;
+import valderfields.rjb_1.model.Image;
 import valderfields.rjb_1.R;
-import valderfields.rjb_1.View.CustomView.FlowLayout;
-import valderfields.rjb_1.View.CustomView.SlidingMenu;
+import valderfields.rjb_1.view.customView.FlowLayout;
+import valderfields.rjb_1.view.customView.SlidingMenu;
 
 /**
  * Image界面点击处理类
@@ -125,7 +122,8 @@ public class ImagePresenter extends Observable implements View.OnClickListener{
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        inputTag.setText(b.getText());
+                        String s[] = b.getText().toString().split(":");
+                        inputTag.setText(s[0]);
                     }
                 });
                 tagsArea.addView(b);

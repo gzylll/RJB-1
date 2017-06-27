@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Model;
+package valderfields.rjb_1.model;
 
 import android.util.Log;
 
@@ -7,7 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 解析JSON数据
@@ -21,12 +23,16 @@ public class jxJSON {
             return false;
         else{
             try {
+                Log.e("Login",data);
                 JSONObject jsonObject = new JSONObject(data);
                 JSONObject jsonObject1 = jsonObject.getJSONObject("user");
                 User.setUID(jsonObject1.getString("uid"));
                 User.setEmail(jsonObject1.getString("email"));
                 User.setPhone(jsonObject1.getString("phone"));
                 User.setUsername(jsonObject1.getString("username"));
+                User.setScore(Integer.parseInt(jsonObject1.getString("score")));
+                User.setHobbies(jsonObject1.getString("hobbies"));
+                Log.e("Login",String.valueOf(jsonObject1.getString("score")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -48,15 +54,29 @@ public class jxJSON {
                 if(o.has("tags")){
                     image.Tags=o.getString("tags").split(",");
                 }
-                else{
-                    image.Tags=new String[]{"yi","啦啦","测试","test","lalalalalalalala","lalalalalalalala"
-                    ,"lalalalalalalala"};
-                }
                 images.add(image);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return images;
+    }
+
+    public static List<Map<String,String>> jxHistory(String data){
+        List<Map<String,String>> histories = new ArrayList<>();
+        try {
+            JSONArray array = new JSONArray(data);
+            for(int i=0;i<array.length();i++){
+                JSONObject object = array.getJSONObject(i);
+                Map<String,String> map = new HashMap<>();
+                map.put("id",object.getString("id"));
+                map.put("tags",object.getString("tags"));
+                map.put("name",object.getString("name"));
+                histories.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return histories;
     }
 }

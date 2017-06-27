@@ -91,6 +91,15 @@
         <item name="android:layout_weight">2</item>
     </style>
 
+    <!-- textview样式 -->
+    <style name="intro">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/text_clo_context</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_weight">2</item>
+    </style>
     <!-- view分割线样式 -->
     <style name="bg_line">
         <item name="android:layout_width">match_parent</item>

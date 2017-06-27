@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Presenter;
+package valderfields.rjb_1.presenter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -21,10 +21,10 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import valderfields.rjb_1.Model.Image;
-import valderfields.rjb_1.Model.NetUtil;
-import valderfields.rjb_1.Model.User;
-import valderfields.rjb_1.Model.jxJSON;
+import valderfields.rjb_1.model.Image;
+import valderfields.rjb_1.model.NetUtil;
+import valderfields.rjb_1.model.User;
+import valderfields.rjb_1.model.jxJSON;
 
 /**
  * Created by 11650 on 2017/5/8.
@@ -34,8 +34,10 @@ public class ImageDataPresenter extends Observable{
 
     public static List<Image> imageList = new ArrayList<>();
     private Context context;
+    private boolean isGetData = false;
 
     public void init(Context context){
+        imageList.clear();
         this.context = context;
         Image image = new Image();
         imageList.add(image);
@@ -43,12 +45,48 @@ public class ImageDataPresenter extends Observable{
     }
 
     public void update(List<Image> images){
-        imageList.remove(imageList.size()-1);
-        for (Image image: images) {
-            imageList.add(image);
+        Log.e("Start","-------------------------------");
+        String s = "";
+        for(int i=0;i<imageList.size();i++){
+            if(imageList.get(i).bitmap==null){
+                s+="0";
+            }else{
+                s+="1";
+            }
         }
+        Log.e("BeforUpdate",s);
+        imageList.remove(imageList.size()-1);
+        s = "";
+        for(int i=0;i<imageList.size();i++){
+            if(imageList.get(i).bitmap==null){
+                s+="0";
+            }else{
+                s+="1";
+            }
+        }
+        Log.e("AfterRemove",s);
+        imageList.addAll(images);
+        s = "";
+        for(int i=0;i<imageList.size();i++){
+            if(imageList.get(i).bitmap==null){
+                s+="0";
+            }else{
+                s+="1";
+            }
+        }
+        Log.e("AfterAdd",s);
         Image image = new Image();
         imageList.add(image);
+        s = "";
+        for(int i=0;i<imageList.size();i++){
+            if(imageList.get(i).bitmap==null){
+                s+="0";
+            }else{
+                s+="1";
+            }
+        }
+        Log.e("AfterUpdate",s);
+        Log.e("End","-------------------------------");
     }
 
     public void Remove(int position){
@@ -58,6 +96,9 @@ public class ImageDataPresenter extends Observable{
     }
 
     public void getData(){
+        if(isGetData)
+            return;
+        isGetData=true;
         Log.e("getData","getData Start at:"+new Date().toString());
         final RequestBody body = new FormBody.Builder()
                 .add("uid", User.getUID())
@@ -69,14 +110,15 @@ public class ImageDataPresenter extends Observable{
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.i("getData", "Failure");
+                        isGetData=false;
                         Log.i("getData", e.getMessage());
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         if(response.code()!=200){
-                            Looper.prepare();
-                            Toast.makeText(context,"请求错误",Toast.LENGTH_SHORT).show();
+                            Log.e("getData",response.body().string());
+                            showMessage("请求错误");
                         }
                         else{
                             Log.e("getData","getData End at:"+new Date().toString());
@@ -104,12 +146,22 @@ public class ImageDataPresenter extends Observable{
             if(conn.getResponseCode() == 200){
                 InputStream inputStream = conn.getInputStream();
                 images.get(i).bitmap = BitmapFactory.decodeStream(inputStream);
+                if(images.get(i).bitmap==null){
+                    Log.e("getData",images.get(i).Url+"图片获取为空");
+                }
             }
         }
         Log.e("getData","getBitmap End at:"+new Date().toString());
         update(images);
+        isGetData=false;
         setChanged();
         notifyObservers();
+    }
+
+    private void showMessage(String s){
+        Looper.prepare();
+        Toast.makeText(context,s,Toast.LENGTH_SHORT).show();
+        Looper.loop();
     }
 
 }

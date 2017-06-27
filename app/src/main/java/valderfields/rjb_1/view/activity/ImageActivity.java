@@ -1,21 +1,19 @@
-package valderfields.rjb_1.View.Activity;
+package valderfields.rjb_1.view.activity;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -26,15 +24,17 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import valderfields.rjb_1.Model.NetUtil;
-import valderfields.rjb_1.Model.User;
-import valderfields.rjb_1.Presenter.ImagePresenter;
-import valderfields.rjb_1.Presenter.ImageDataPresenter;
-import valderfields.rjb_1.Model.Image;
-import valderfields.rjb_1.View.CustomView.PageTransformer;
+import valderfields.rjb_1.model.History;
+import valderfields.rjb_1.model.NetUtil;
+import valderfields.rjb_1.model.User;
+import valderfields.rjb_1.model.dbHelper;
+import valderfields.rjb_1.presenter.ImagePresenter;
+import valderfields.rjb_1.presenter.ImageDataPresenter;
+import valderfields.rjb_1.model.Image;
+import valderfields.rjb_1.view.customView.PageTransformer;
 import valderfields.rjb_1.R;
-import valderfields.rjb_1.View.CustomView.SlidingMenu;
-import valderfields.rjb_1.View.CustomView.ViewPagerAdapter;
+import valderfields.rjb_1.view.customView.SlidingMenu;
+import valderfields.rjb_1.view.customView.ViewPagerAdapter;
 
 public class ImageActivity extends AppCompatActivity implements
                 Observer,ViewPager.OnPageChangeListener,View.OnClickListener,View.OnTouchListener{
@@ -44,8 +44,11 @@ public class ImageActivity extends AppCompatActivity implements
     private ImagePresenter presenter;
     private int position = 0;
     private boolean first = true;
+    private History history = new History();
+    private dbHelper db = new dbHelper(this,"history");
 
     private TextView name;
+    private TextView score,process;
     private View myInfo;
     private View Quit;
     private View myRecord;
@@ -58,6 +61,9 @@ public class ImageActivity extends AppCompatActivity implements
                 imageDataPresenter.Remove(position);
                 adapter.notifyDataSetChanged();
                 presenter.closePopwindow();
+                db.instert(history);
+                User.addScore();
+                initScore();
             }
             else {
                 Toast.makeText(ImageActivity.this,"提交错误",Toast.LENGTH_SHORT).show();
@@ -74,10 +80,25 @@ public class ImageActivity extends AppCompatActivity implements
         presenter = new ImagePresenter(this);
         presenter.SetSlidingMenu(menu);
         presenter.addObserver(this);
+        score = (TextView)menu.findViewById(R.id.Score);
+        process = (TextView)menu.findViewById(R.id.Process);
+        initScore();
         initView();
         initViewPager();
+        Log.e("ImageActivity","onCreate");
     }
 
+    private void initScore(){
+        score.setText(String.valueOf(User.getScore()));
+        int p;
+        for(int i=100;;i++){
+            if(i>User.getScore()){
+                p=i;
+                break;
+            }
+        }
+        process.setText(User.getScore()+"/"+p);
+    }
     private void initView(){
         name = (TextView)findViewById(R.id.myName);
         name.setText(User.getUsername());
@@ -162,6 +183,10 @@ public class ImageActivity extends AppCompatActivity implements
 
     public void submitTag(final int position, String tag){
         Image image = ImageDataPresenter.imageList.get(position);
+        history.setId(image.Id);
+        history.setName(image.Name);
+        history.setTags(tag);
+        history.setTime(new Timestamp(System.currentTimeMillis()).toString());
         final RequestBody body = new FormBody.Builder()
                 .add("tags",tag)
                 .add("id",image.Id)
@@ -171,7 +196,7 @@ public class ImageActivity extends AppCompatActivity implements
         new Thread(){
             @Override
             public void run() {
-                Request request = NetUtil.getRequest(NetUtil.getSubmitTagUrl(), body);
+                Request request = NetUtil.getRequestWithSession(NetUtil.getSubmitTagUrl(), body);
                 NetUtil.getOkHttpClient().newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -213,6 +238,8 @@ public class ImageActivity extends AppCompatActivity implements
                 finish();
                 break;
             case R.id.myRecord:
+                intent = new Intent(this,HistoryActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -238,7 +265,6 @@ public class ImageActivity extends AppCompatActivity implements
                     case R.id.myRecord:
                         intent = new Intent(this, HistoryActivity.class);
                         startActivity(intent);
-                        finish();
                         break;
                 }
                 return true;

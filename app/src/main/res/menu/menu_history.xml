@@ -2,14 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/modify"
-        android:title="@string/change"
+        android:id="@+id/Refresh"
+        android:title="@string/refresh"
         android:visible="true"
-        app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/complete"
-        android:title="@string/complete"
-        android:visible="false"
         app:showAsAction="ifRoom"/>
 </menu>

@@ -1,4 +1,4 @@
-package valderfields.rjb_1.Presenter;
+package valderfields.rjb_1.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -14,16 +14,14 @@ import cn.smssdk.SMSSDK;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import valderfields.rjb_1.Model.EncodeUtil;
-import valderfields.rjb_1.Model.NetUtil;
-import valderfields.rjb_1.Model.jxJSON;
-import valderfields.rjb_1.MyApplication;
-import valderfields.rjb_1.View.Activity.ImageActivity;
-import valderfields.rjb_1.View.Activity.LoginActivity;
+import valderfields.rjb_1.model.EncodeUtil;
+import valderfields.rjb_1.model.NetUtil;
+import valderfields.rjb_1.model.User;
+import valderfields.rjb_1.model.jxJSON;
+import valderfields.rjb_1.view.activity.LoginActivity;
 
 /**
  * Created by 11650 on 2017/5/13.
@@ -65,6 +63,7 @@ public class LoginPresenter extends Observable{
                             String s = response.body().string();
                             Log.e("return",s);
                             if(jxJSON.jxLoginData(s)){
+                                User.setSession(response.header("Set-Cookie"));
                                 setChanged();
                                 notifyObservers("Login Success");
                             }else{

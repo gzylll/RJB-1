@@ -1,4 +1,4 @@
-package valderfields.rjb_1.View.Activity;
+package valderfields.rjb_1.view.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -22,11 +22,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 import cn.smssdk.SMSSDK;
-import valderfields.rjb_1.Model.EncodeUtil;
-import valderfields.rjb_1.Model.User;
-import valderfields.rjb_1.Presenter.LoginPresenter;
+import valderfields.rjb_1.model.EncodeUtil;
+import valderfields.rjb_1.model.User;
+import valderfields.rjb_1.presenter.LoginPresenter;
 import valderfields.rjb_1.R;
-import valderfields.rjb_1.View.CustomView.Rotate3DAnimation;
+import valderfields.rjb_1.view.customView.Rotate3DAnimation;
 
 /**
  * 登录和注册操作
@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 User.setAuto(true);
             }
             //登录
+            Log.e("Login","un:"+un+",pw:"+pw);
             presenter.Login(un,pw);
         }
         else{
