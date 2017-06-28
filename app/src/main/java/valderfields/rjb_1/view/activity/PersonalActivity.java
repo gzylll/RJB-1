@@ -102,6 +102,7 @@ public class PersonalActivity extends AppCompatActivity{
                 Hobby=User.getHobbies();
             if(!Password.equals(""))
                 Password=EncodeUtil.shaEncode(Password);
+            Toast.makeText(this,"Email:"+Email+",Password:"+Password+",Hobby"+Hobby+".",Toast.LENGTH_SHORT).show();
             NetUtil.getOkHttpClient().newCall(
                     NetUtil.getRequestWithSession(
                             NetUtil.getGetUpdateUserInfoUrl(),
